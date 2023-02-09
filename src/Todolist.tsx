@@ -3,12 +3,13 @@ import {ChangeFilterType} from "./App";
 import {KeyboardEvent} from "react";
 
 type TodolistPropsType = {
-    shapka: string;
+    id:string;
+    title: string;
     //tasks:Array<TaskType>;
     tasks: TaskType[];
     removeTask: (task:string) => void;
     addTask:(newTitle:string)=> void;
-    changeFilter:(value:ChangeFilterType)=>void;
+    changeFilter:(value:ChangeFilterType,todolistId:string)=>void;
     changeStatus:(id:string,isDone:boolean)=>void;
     filter:ChangeFilterType;
 }
@@ -39,20 +40,20 @@ export const Todolist = (props: TodolistPropsType) => {
         }
     }
     const onAllClick=()=>{
-        props.changeFilter('all')
+        props.changeFilter('all',props.id)
     }
     const onActiveClick=()=>{
-        props.changeFilter('active')
+        props.changeFilter('active',props.id)
     }
     const onComplitedClick=()=>{
-        props.changeFilter('complited')
+        props.changeFilter('complited',props.id)
     }
 
     const [title,setTitle]=useState('')
 
     return (
         <div>
-            <h3>{props.shapka}</h3>
+            <h3>{props.title}</h3>
             <div>
                 <input value={title}
                        className={error ? "error":""}

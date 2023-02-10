@@ -14,7 +14,7 @@ type TodolistPropsType = {
     filter:ChangeFilterType;
     removeTodolist:(todolistId:string)=>void;
 }
-type TaskType = {
+export type TaskType = {
     id:string;
     title: string;
     isDone: boolean;

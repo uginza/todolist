@@ -58,7 +58,8 @@ export const Todolist = (props: TodolistPropsType) => {
                     return (
                         <li key={el.id} className={el.isDone ? "is-done" : ""}>
                             <input onChange={onChangeHandler} type="checkbox" checked={el.isDone}/>
-                            <EditableSpan title={el.title}/>
+                            <EditableSpan title={el.title}
+                            onChange={(value)=>{}}/>
                             <button onClick={onClickHandler}>X</button>
                         </li>
                     )

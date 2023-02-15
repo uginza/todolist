@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 export type ChangeFilterType = 'all' | 'active' | 'complited'
 type TodolistType = {
@@ -135,6 +136,7 @@ function App() {
                         tasksForTodolist = tasksForTodolist.filter(task => task.isDone)
                     }
                     return <Grid item>
+                        <Paper style={{padding:'10px'}}>
                         <Todolist
                         key={tl.id}
                         id={tl.id}
@@ -149,6 +151,7 @@ function App() {
                         filter={tl.filter}
                         removeTodolist={removeTodolist}
                     />
+                        </Paper>
                     </Grid>
                 })}
                 </Grid>

@@ -5,6 +5,7 @@ import {EditableSpan} from "./EditableSpan";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from "@mui/material/Button/Button";
+import Checkbox from "@mui/material/Checkbox/Checkbox";
 
 type TodolistPropsType = {
     id: string;
@@ -57,7 +58,7 @@ export const Todolist = (props: TodolistPropsType) => {
             </h3>
             <AddItem addItem={addTask}/>
 
-            <ul>
+            <div>
                 {props.tasks.map((el) => {
                     const onClickHandler = () => {
                         props.removeTask(el.id, props.id)
@@ -71,18 +72,18 @@ export const Todolist = (props: TodolistPropsType) => {
                         props.changeTaskTitle(el.id, newTitle, props.id)
                     }
                     return (
-                        <li key={el.id} className={el.isDone ? "is-done" : ""}>
-                            <input onChange={onChangeStatusHandler} type="checkbox" checked={el.isDone}/>
+                        <div key={el.id} className={el.isDone ? "is-done" : ""}>
+                            <Checkbox onChange={onChangeStatusHandler} checked={el.isDone}/>
                             <EditableSpan title={el.title}
                             onChange={onChangeTitleHandler}/>
                             <IconButton onClick={onClickHandler} aria-label="delete">
                                 <DeleteIcon />
                             </IconButton>
                            {/* <button onClick={onClickHandler}>X</button>*/}
-                        </li>
+                        </div>
                     )
                 })}
-            </ul>
+            </div>
             <div>
                 <Button variant={props.filter === "all" ? "contained" :"text"} onClick={onAllClick}>All</Button>
                 <Button  variant={props.filter === "active"  ? "contained" :"text"} color={"primary"} onClick={onActiveClick}>Active

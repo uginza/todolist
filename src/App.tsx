@@ -3,6 +3,13 @@ import './App.css';
 import {TaskType, Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItem} from "./AddItem";
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 
 export type ChangeFilterType = 'all' | 'active' | 'complited'
 type TodolistType = {
@@ -104,7 +111,21 @@ function App() {
 
     return (
         <div className="App">
+            <AppBar position="static">
+                <Toolbar variant="dense">
+                    <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" color="inherit" component="div">
+                        Photos
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+            <Container fixed>
+                <Grid container>
             <AddItem addItem={addTodolist}/>
+                </Grid>
+                <Grid container spacing={3}>
             {
                 todolists.map(tl => {
                     let tasksForTodolist = tasks[tl.id]
@@ -113,7 +134,8 @@ function App() {
                     } else if (tl.filter === 'complited') {
                         tasksForTodolist = tasksForTodolist.filter(task => task.isDone)
                     }
-                    return <Todolist
+                    return <Grid item>
+                        <Todolist
                         key={tl.id}
                         id={tl.id}
                         title={tl.title}
@@ -127,8 +149,10 @@ function App() {
                         filter={tl.filter}
                         removeTodolist={removeTodolist}
                     />
+                    </Grid>
                 })}
-
+                </Grid>
+            </Container>
         </div>
     );
 }

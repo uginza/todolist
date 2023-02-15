@@ -1,6 +1,9 @@
+import { AddCircle } from "@mui/icons-material";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton/IconButton";
 import TextField from "@mui/material/TextField/TextField";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+
 
 type AddItemPropsType = {
     addItem: (newTitle: string) => void;
@@ -37,7 +40,7 @@ export function AddItem(props: AddItemPropsType) {
         maxWidth: '30px',
         maxHeight: '30px',
         minWidth: '30px',
-        minHeight: '30px',
+        minHeight: '30px'
     }
 
 
@@ -49,12 +52,12 @@ export function AddItem(props: AddItemPropsType) {
         <TextField size="small"
                    id="standard-basic"
                    label="Type title"
-                   variant="standard"
+                   variant="outlined"
                    error={!!error}
                    helperText={error}
                    onChange={onChangeHandler}
                    onKeyPress={onKeyPressHandler}/>
         {/*<button onClick={addTask}>+</button>*/}
-        <Button style={buttonSettings} variant="contained" onClick={addTask}>+</Button>
+        <IconButton color="secondary" style={buttonSettings} onClick={addTask}><AddCircle/></IconButton>
     </div>)
 }

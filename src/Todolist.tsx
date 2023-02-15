@@ -4,6 +4,7 @@ import {AddItem} from "./AddItem";
 import {EditableSpan} from "./EditableSpan";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
+import Button from "@mui/material/Button/Button";
 
 type TodolistPropsType = {
     id: string;
@@ -83,12 +84,12 @@ export const Todolist = (props: TodolistPropsType) => {
                 })}
             </ul>
             <div>
-                <button className={props.filter === "all" ? "active-filter" : ''} onClick={onAllClick}>All</button>
-                <button className={props.filter === "active" ? "active-filter" : ""} onClick={onActiveClick}>Active
-                </button>
-                <button className={props.filter === "complited" ? "active-filter" : ""}
+                <Button variant={props.filter === "all" ? "contained" :"text"} onClick={onAllClick}>All</Button>
+                <Button  variant={props.filter === "active"  ? "contained" :"text"} color={"primary"} onClick={onActiveClick}>Active
+                </Button>
+                <Button variant={props.filter === "complited"  ? "contained" :"text"} color={"secondary"}
                         onClick={onComplitedClick}>Completed
-                </button>
+                </Button>
             </div>
         </div>
     )

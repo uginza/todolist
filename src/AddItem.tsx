@@ -53,6 +53,7 @@ export function AddItem(props: AddItemPropsType) {
                    id="standard-basic"
                    label="Type title"
                    variant="outlined"
+                   value={title}
                    error={!!error}
                    helperText={error}
                    onChange={onChangeHandler}

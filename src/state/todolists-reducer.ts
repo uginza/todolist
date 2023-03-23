@@ -18,6 +18,12 @@ type ActionType = {
                     todoList.title=action.title;
                 }
                 return [...state]
+            case 'CHANGE-TODOLIST-FILTER':
+                let todolist2 = state.find(t => t.id === action.id)
+                if (todolist2) {
+                    todolist2.filter = action.filter;
+                }
+                return [...state]
             default:
                 throw new Error('I don\'t understand this type')
         }

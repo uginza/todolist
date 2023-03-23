@@ -13,7 +13,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
 export type ChangeFilterType = 'all' | 'active' | 'complited'
-type TodolistType = {
+export type TodolistType = {
     id: string;
     title: string;
     filter: ChangeFilterType;

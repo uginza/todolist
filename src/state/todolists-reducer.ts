@@ -46,19 +46,19 @@ export const todolistsReducer = (state: Array<TodolistType>, action: ActionType)
             }
             return [...state]
         default:
-            throw new Error('I don\'t understand this type')
+            return state;
     }
 }
 
-export const RemoveTodolistAC=(todolistId:string):RemoveTodolistActionType=>{
+export const removeTodolistAC=(todolistId:string):RemoveTodolistActionType=>{
     return {type:'REMOVE-TODOLIST',id:todolistId}
 }
-export const AddTodolistAC=(todolistTitle: string):AddTodolistActionType=>{
+export const addTodolistAC=(todolistTitle: string):AddTodolistActionType=>{
     return {type:'ADD-TODOLIST',title:todolistTitle}
 }
-export const ChangeTodolistAC=(todolistId:string,todolistTitle: string):ChangeTodolistTitleActionType=>{
+export const changeTodolistAC=(todolistId:string, todolistTitle: string):ChangeTodolistTitleActionType=>{
     return {type:'CHANGE-TODOLIST-TITLE',id:todolistId,title:todolistTitle}
 }
-export const ChangeTodolistFiltertAC=(todolistId:string,filter:ChangeFilterType):ChangeTodolistFilterActionType=>{
+export const changeTodolistFiltertAC=(todolistId:string, filter:ChangeFilterType):ChangeTodolistFilterActionType=>{
     return {type:'CHANGE-TODOLIST-FILTER',id:todolistId,filter:filter}
 }

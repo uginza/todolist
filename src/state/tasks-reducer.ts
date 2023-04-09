@@ -13,8 +13,17 @@ type AddTaskActionType = {
     todolistId:string
 }
 
-type ActionType = RemoveTaskActionType
+type ChangeTaskStatusActionType={
+    type:'CHANGE-TASK-STATUS'
+    taskId:string
+    isDone:boolean
+    todolistId:string
+}
+
+type ActionType =
+    RemoveTaskActionType
     | AddTaskActionType
+    |ChangeTaskStatusActionType
 
 
 
@@ -38,7 +47,14 @@ export const tasksReducer = (state: TasksStateType, action: ActionType): TasksSt
                     title: action.todolistTitle, isDone: false},
                     ...state[action.todolistId]]}*/
         }
-
+        case 'CHANGE-TASK-STATUS':{
+           const stateCopy={...state}
+            let task=stateCopy[action.todolistId].find(t=>t.id===action.taskId)
+            if(task){
+                task.isDone=action.isDone
+            }
+            return stateCopy
+        }
         default:
             return state;
     }
@@ -47,6 +63,10 @@ export const tasksReducer = (state: TasksStateType, action: ActionType): TasksSt
 export const removeTaskAC=(taskId:string,todolistId:string):RemoveTaskActionType=>{
     return {type:'REMOVE-TASK',taskId,todolistId}
 }
+
 export const addTaskAC=(todolistTitle: string,todolistId:string):AddTaskActionType=>{
     return {type:'ADD-TASK',todolistTitle,todolistId}
+}
+export const changeTaskStatusAC=(taskId: string,isDone:boolean,todolistId:string):ChangeTaskStatusActionType=>{
+    return {type:'CHANGE-TASK-STATUS',taskId,isDone,todolistId}
 }

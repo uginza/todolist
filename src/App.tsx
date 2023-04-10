@@ -23,7 +23,7 @@ export type TasksStateType={
     [key:string]:Array<TaskType>
 }
 
-function AppWithReducers() {
+function App() {
     let todolistID1 = v1();
     let todolistID2 = v1();
     let [tasks, setTasks] = useState<TasksStateType>({

@@ -1,3 +1,5 @@
+import {stat} from "fs";
+
 type StateType = {
     age: number
     childrenCount: number
@@ -19,6 +21,6 @@ type ActionType = {
             case 'INCREMENT-CHILDREN-COUNT':
                 return {...state,childrenCount:state.childrenCount+1}
             default:
-                throw new Error('I don\'t understand this type')
+                return state
         }
     }

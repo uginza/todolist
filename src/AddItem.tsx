@@ -1,4 +1,4 @@
-import { AddCircle } from "@mui/icons-material";
+import {AddCircle} from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton/IconButton";
 import TextField from "@mui/material/TextField/TextField";
@@ -9,7 +9,8 @@ type AddItemPropsType = {
     addItem: (newTitle: string) => void;
 }
 
-export function AddItem(props: AddItemPropsType) {
+export const AddItem=React.memo((props: AddItemPropsType) =>{
+    console.log("AddItem is called")
 
     const [title, setTitle] = useState('')
 
@@ -20,7 +21,9 @@ export function AddItem(props: AddItemPropsType) {
     }
 
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        setError("")
+        if (error !== null) {
+            setError("")
+        }
         if (event.key === 'Enter') {
             addTask();
         }
@@ -61,4 +64,4 @@ export function AddItem(props: AddItemPropsType) {
         {/*<button onClick={addTask}>+</button>*/}
         <IconButton color="secondary" style={buttonSettings} onClick={addTask}><AddCircle/></IconButton>
     </div>)
-}
+})

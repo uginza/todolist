@@ -1,7 +1,6 @@
 import React, {useReducer, useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from "./Todolist";
-import {v1} from "uuid";
 import {AddItem} from "./AddItem";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -17,10 +16,10 @@ import {
     changeTodolistFiltertAC,
     changeTodolistTitleAC,
     removeTodolistAC,
-    todolistsReducer
 } from "./state/todolists-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./state/store";
+import {v1} from "uuid";
 
 export type ChangeFilterType = 'all' | 'active' | 'complited'
 export type TodolistType = {
@@ -37,6 +36,7 @@ export type TasksStateType={
 
 
 function AppWithRedux() {
+    console.log("App is called")
     const dispatch=useDispatch()
     const todolists=useSelector<AppRootState,Array<TodolistType>>(state=>state.todolists)
     const tasks=useSelector<AppRootState,TasksStateType>(state=>state.tasks)
@@ -105,10 +105,9 @@ function AppWithRedux() {
                                 } else if (tl.filter === 'complited') {
                                     tasksForTodolist = tasksForTodolist.filter(task => task.isDone)
                                 }
-                                return <Grid item>
-                                    <Paper style={{padding: '10px'}}>
+                                return <Grid item key={tl.id}>
+                                    <Paper  style={{padding: '10px'}}>
                                         <Todolist
-                                            key={tl.id}
                                             id={tl.id}
                                             title={tl.title}
                                             tasks={tasksForTodolist}

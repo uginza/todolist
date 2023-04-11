@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useCallback} from "react";
 import {ChangeFilterType} from "./App";
 import {AddItem} from "./AddItem";
 import {EditableSpan} from "./EditableSpan";
@@ -41,9 +41,9 @@ export const Todolist = (props: TodolistPropsType) => {
         props.removeTodolist(props.id)
     }
 
-    const addTask=(title:string)=>{
+    const addTask=useCallback((title:string)=>{
         props.addTask(title,props.id)
-    }
+    },[])
     const changeTodolistTitle=(newTitle:string)=>{
         props.changeTodolistTitle(props.id,newTitle)
     }

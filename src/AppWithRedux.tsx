@@ -41,10 +41,10 @@ function AppWithRedux() {
     const todolists=useSelector<AppRootState,Array<TodolistType>>(state=>state.todolists)
     const tasks=useSelector<AppRootState,TasksStateType>(state=>state.tasks)
 
-    const addTask = (newTitle: string, todolistId: string) => {
+    const addTask = useCallback((newTitle: string, todolistId: string) => {
         const action = addTaskAC(newTitle, todolistId)
         dispatch(action)
-    }
+    },[])
 
     const removeTask=useCallback((id: string, todolistId: string)=> {
         const action = removeTaskAC(id, todolistId)

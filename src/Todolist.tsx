@@ -29,15 +29,15 @@ export type TaskType = {
 export const Todolist = React.memo((props: TodolistPropsType) => {
     console.log('Todolist is called')
 
-    const onAllClick = () => {
+    const onAllClick =useCallback( () => {
         props.changeFilter('all', props.id)
-    }
-    const onActiveClick = () => {
+    },[props.changeFilter,props.id])
+    const onActiveClick =useCallback( () => {
         props.changeFilter('active', props.id)
-    }
-    const onComplitedClick = () => {
+    },[props.changeFilter,props.id])
+    const onComplitedClick =useCallback( () => {
         props.changeFilter('complited', props.id)
-    }
+    },[props.changeFilter,props.id])
     const removeTodolistHandler = () => {
         props.removeTodolist(props.id)
     }

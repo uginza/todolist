@@ -17,6 +17,7 @@
     "@types/react-dom": "^18.0.7",
     "@types/react-redux": "^7.1.25",
     "@types/uuid": "^9.0.0",
+    "jest-environment-jsdom": "^29.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
@@ -31,7 +32,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 9009",
     "build-storybook": "storybook build"
   },
   "eslintConfig": {
@@ -40,6 +41,14 @@
       "react-app/jest"
     ],
     "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      },
       {
         "files": [
           "**/*.stories.*"
@@ -68,8 +77,9 @@
     "@storybook/addon-interactions": "7.0.4",
     "@storybook/addon-links": "7.0.4",
     "@storybook/blocks": "7.0.4",
+    "@storybook/cli": "^7.0.4",
     "@storybook/preset-create-react-app": "7.0.4",
-    "@storybook/react": "7.0.4",
+    "@storybook/react": "^7.0.4",
     "@storybook/react-webpack5": "7.0.4",
     "@storybook/testing-library": "0.0.14-next.2",
     "babel-plugin-named-exports-order": "0.0.2",

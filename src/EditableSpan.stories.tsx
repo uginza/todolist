@@ -2,9 +2,7 @@ import React from "react";
 import {action} from "@storybook/addon-actions"
 import {EditableSpan} from "./EditableSpan";
 
-const removeTaskCallback = action('Task was removed')
-const changeTaskStatusCallback = action('TaskStatus was changed')
-const changeTaskTitleCallback = action('Task Title was changed')
+const onChangeCallback = action('Value was removed')
 
 export default {
     title: "EditableSpan Component",
@@ -12,6 +10,5 @@ export default {
 }
 
 export const EditableSpanExample = (props: any) => {
-    return <>
-    </>
+    return <EditableSpan title={"Start value"} onChange={onChangeCallback}/>
 }

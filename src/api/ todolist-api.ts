@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {CreateTodolist, DeleteTodolist, GetTodolists} from "../stories/todolists-api.stories";
 
 const settings = {
     withCredentials: true,
@@ -13,6 +14,28 @@ export const todolistAPI = {
         const promise = axios.put(
             `https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`,
             { title: title },
+            settings
+        )
+        return promise
+    },
+    DeleteTodolist(todolistId: string) {
+        const promise = axios.delete(
+            `https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}`,
+            settings
+        )
+        return promise
+    },
+    CreateTodolist(title: string) {
+        const promise = axios.post(
+            `https://social-network.samuraijs.com/api/1.1/todo-lists`,
+            { title: title },
+            settings
+        )
+        return promise
+    },
+    GetTodolists() {
+        const promise = axios.get(
+            `https://social-network.samuraijs.com/api/1.1/todo-lists`,
             settings
         )
         return promise

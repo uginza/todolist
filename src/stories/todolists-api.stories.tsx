@@ -19,7 +19,7 @@ export const GetTodolists = () => {
         // здесь мы будем делать запрос и ответ закидывать в стейт.
         // который в виде строки будем отображать в div-ке
 
-        axios.get('https://social-network.samuraijs.com/api/1.1/todo-lists', settings)
+        todolistAPI.GetTodolists()
             .then((res) => {
                 setState(res.data)
             })
@@ -29,9 +29,7 @@ export const GetTodolists = () => {
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        axios.post('https://social-network.samuraijs.com/api/1.1/todo-lists',
-            {title: 'second list'},
-            settings)
+        todolistAPI.CreateTodolist("Hello")
             .then((res)=>{
                 setState(res.data)
             })
@@ -43,8 +41,7 @@ export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
         const todolistID='b17aeafe-335f-4d64-9873-02e029ba04e9'
-        axios.delete(`https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistID}`,
-            settings)
+        todolistAPI.DeleteTodolist(todolistID)
             .then((res)=>{
                 setState(res.data)
             })

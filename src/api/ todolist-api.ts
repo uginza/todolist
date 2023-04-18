@@ -17,45 +17,28 @@ type TodolistType={
     order:number
 }
 
-type CreateTodolistResponseType = {
+export type ResponseType<D> = {
     resultCode: number
     messages: Array<string>
     fieldsErrors: Array<string>
-    data: {
-        item: TodolistType
-    }
+    data: D
 }
-
-type UpdateTodolistResponseType = {
-    resultCode: number
-    messages: Array<string>
-    fieldsErrors: Array<string>
-    data: {}
-}
-
-type DeleteTodolistResponseType = {
-    resultCode: number
-    messages: Array<string>
-    fieldsErrors: Array<string>
-    data: {}
-}
-
 export const todolistAPI = {
     updateTodolist(todolistId: string, title: string) {
-        const promise = instance.put<UpdateTodolistResponseType>(
+        const promise = instance.put<ResponseType<{}> >(
             `todo-lists/${todolistId}`,
             { title: title }
         )
         return promise
     },
     DeleteTodolist(todolistId: string) {
-        const promise = instance.delete<DeleteTodolistResponseType>(
+        const promise = instance.delete<ResponseType<{}>>(
             `todo-lists/${todolistId}`
         )
         return promise
     },
     CreateTodolist(title: string) {
-        const promise = instance.post<CreateTodolistResponseType>(
+        const promise = instance.post<ResponseType<{item: TodolistType}>>(
             `todo-lists`,
             { title: title }
         )

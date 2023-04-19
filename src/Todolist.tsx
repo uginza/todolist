@@ -5,28 +5,23 @@ import {EditableSpan} from "./EditableSpan";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from "@mui/material/Button/Button";
-import Checkbox from "@mui/material/Checkbox/Checkbox";
 import {Task} from "./Task";
+import {TaskStatus, TaskType} from "./api/tasks-api";
 
 type TodolistPropsType = {
     id: string;
     title: string;
     //tasks:Array<TaskType>;
-    tasks: TaskType[];
+    tasks:TaskType[];
 
     addTask: (newTitle: string, todolistId: string) => void;
     changeFilter: (value: ChangeFilterType, todolistId: string) => void;
     removeTask: (task: string, todolistId: string) => void;
-    changeTaskStatus: (id: string, isDone: boolean, todolistId: string) => void;
+    changeTaskStatus: (id: string, status:TaskStatus, todolistId: string) => void;
     changeTaskTitle: (id: string, newTitle: string, todolistId: string) => void;
     filter: ChangeFilterType;
     removeTodolist: (todolistId: string) => void;
     changeTodolistTitle: (newTitle: string, todolistId: string) => void
-}
-export type TaskType = {
-    id: string;
-    title: string;
-    isDone: boolean;
 }
 export const Todolist = React.memo((props: TodolistPropsType) => {
     console.log('Todolist is called')

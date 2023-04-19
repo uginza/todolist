@@ -10,40 +10,68 @@ const instance = axios.create({
 })
 
 
-type TodolistType={
-    id:string,
-    title:string,
-    addedDate:string,
-    order:number
+export type TaskType = {
+    description: string
+    title: string
+    completed: boolean
+    status: TaskStatus
+    priority: TaskPriority
+    startDate: string
+    deadline: string
+    id: string
+    todoListId: string
+    order: number
+    addedDate: string
 }
 
-export type ResponseType<D> = {
+type GetTaskType = {
+    totalCount: number | null
+    items: TaskType[]
+    error: string
+}
+
+export type ResponseType<D = {}> = {
     resultCode: number
     messages: Array<string>
-    fieldsErrors: Array<string>
     data: D
 }
+
+export enum TaskStatus {
+    New,
+    InProgress,
+    Complited,
+    Draft
+}
+
+export enum TaskPriority {
+    Low,
+    Middle,
+    Hi,
+    Urgent,
+    Later
+}
+
 export const tasksAPI = {
-    updateTasks(todolistId: string,taskId:string, title: string) {
-        return instance.put(
+    updateTasks(todolistId: string, taskId: string, title: string) {
+        return instance.put<ResponseType<TaskType>>(
             `todo-lists/${todolistId}/tasks/${taskId}`,
-            { title: title }
+            {title: title}
         )
 
     },
-    DeleteTasks(todolistId: string,taskId:string) {
-        return instance.delete(
+    DeleteTasks(todolistId: string, taskId: string) {
+        return instance.delete<ResponseType>(
             `todo-lists/${todolistId}/tasks/${taskId}`
         )
     },
-    CreateTasks(todolistId: string,title: string) {
-        return instance.post(
+    CreateTasks(todolistId: string, title: string) {
+        return instance.post<ResponseType<TaskType>>(
             `todo-lists/${todolistId}/tasks`,
-            { title: title }
+            {title: title}
         )
-            },
-    GetTasks(todolistId:string) {
-        return instance.get(
+    },
+    GetTasks(todolistId: string) {
+        return instance.get<GetTaskType>(
             `todo-lists/${todolistId}/tasks`)
-            },
+    },
 }

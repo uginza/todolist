@@ -1,6 +1,6 @@
 import React, {useCallback, useReducer, useState} from 'react';
 import './App.css';
-import {TaskType, Todolist} from "./Todolist";
+import {Todolist} from "./Todolist";
 import {AddItem} from "./AddItem";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -21,12 +21,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./state/store";
 import {v1} from "uuid";
 
-export type ChangeFilterType = 'all' | 'active' | 'complited'
-export type TodolistType = {
-    id: string;
-    title: string;
-    filter: ChangeFilterType;
-}
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>

@@ -1,5 +1,4 @@
 import React, {ChangeEvent, useCallback} from "react";
-import {ChangeFilterType} from "./App";
 import {AddItem} from "./AddItem";
 import {EditableSpan} from "./EditableSpan";
 import IconButton from "@mui/material/IconButton";
@@ -7,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Button from "@mui/material/Button/Button";
 import {Task} from "./Task";
 import {TaskStatus, TaskType} from "./api/tasks-api";
+import {ChangeFilterType} from "./state/todolists-reducer";
 
 type TodolistPropsType = {
     id: string;
@@ -48,9 +48,9 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
 
     let tasksForTodolist = props.tasks
     if (props.filter === 'active') {
-        tasksForTodolist = props.tasks.filter(task => !task.isDone)
+        tasksForTodolist = props.tasks.filter(task => task.status===TaskStatus.New)
     } else if (props.filter === 'complited') {
-        tasksForTodolist = props.tasks.filter(task => task.isDone)
+        tasksForTodolist = props.tasks.filter(task => task.status===TaskStatus.Complited)
     }
 
     return (

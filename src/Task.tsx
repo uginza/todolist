@@ -3,11 +3,11 @@ import Checkbox from "@mui/material/Checkbox/Checkbox";
 import {EditableSpan} from "./EditableSpan";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {TaskType} from "./Todolist";
+import {TaskStatus} from "./api/tasks-api";
 
 type TaskPropsType = {
     removeTask: (task: string, todolistId: string) => void;
-    changeTaskStatus: (id: string, isDone: boolean, todolistId: string) => void;
+    changeTaskStatus: (id: string, status:TaskStatus, todolistId: string) => void;
     changeTaskTitle: (id: string, newTitle: string, todolistId: string) => void;
     task: TaskType
     todolistId: string

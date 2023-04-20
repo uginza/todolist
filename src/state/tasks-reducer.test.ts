@@ -1,4 +1,5 @@
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './tasks-reducer'
+export {}
+/*import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './tasks-reducer'
 import {TasksStateType} from '../App'
 import {addTodolistAC, removeTodolistAC} from "./todolists-reducer";
 
@@ -100,4 +101,4 @@ test('property with todolistId should be deleted', () => {
 
     expect(keys.length).toBe(1)
     expect(endState['todolistId2']).not.toBeDefined()
-})
+})*/

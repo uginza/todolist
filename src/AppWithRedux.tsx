@@ -1,4 +1,4 @@
-import React, {useCallback, useReducer, useState} from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
 import {AddItem} from "./AddItem";
@@ -10,16 +10,16 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./state/tasks-reducer";
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
 import {
-    addTodolistAC,
+    addTodolistAC, ChangeFilterType,
     changeTodolistFiltertAC,
     changeTodolistTitleAC,
-    removeTodolistAC,
+    removeTodolistAC, TodolistDomainType,
 } from "./state/todolists-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./state/store";
-import {v1} from "uuid";
+import {TaskStatus, TaskType} from "./api/tasks-api";
 
 
 export type TasksStateType = {
@@ -30,7 +30,7 @@ export type TasksStateType = {
 function AppWithRedux() {
     console.log("App is called")
     const dispatch = useDispatch()
-    const todolists = useSelector<AppRootState, Array<TodolistType>>(state => state.todolists)
+    const todolists = useSelector<AppRootState, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootState, TasksStateType>(state => state.tasks)
 
     const addTask = useCallback((newTitle: string, todolistId: string) => {
@@ -43,8 +43,8 @@ function AppWithRedux() {
         dispatch(action)
     }, [dispatch])
 
-    const changeStatus = useCallback((id: string, isDone: boolean, todolistId: string) => {
-        const action = changeTaskStatusAC(id, isDone, todolistId)
+    const changeStatus = useCallback((id: string,status:TaskStatus, todolistId: string) => {
+        const action = changeTaskStatusAC(id, status, todolistId)
         dispatch(action)
     }, [dispatch])
 

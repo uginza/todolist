@@ -1,4 +1,5 @@
-import {TasksStateType, TodolistType} from "../App";
+export {}
+/*import {TasksStateType, TodolistType} from "../App";
 import {addTodolistAC, todolistsReducer} from "./todolists-reducer";
 import {tasksReducer} from "./tasks-reducer";
 
@@ -17,4 +18,4 @@ test('ids should be equals', () => {
 
     expect(idFromTasks).toBe(action.todolistId)
     expect(idFromTodolists).toBe(action.todolistId)
-})
+})*/

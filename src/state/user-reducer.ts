@@ -1,4 +1,4 @@
-import {stat} from "fs";
+
 
 type StateType = {
     age: number

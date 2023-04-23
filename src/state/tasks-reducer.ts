@@ -1,7 +1,8 @@
 import {TasksStateType} from "../App";
 import {v1} from "uuid";
 import {AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType} from "./todolists-reducer";
-import {TaskPriority, TaskStatus} from "../api/tasks-api";
+import {TaskPriority, TaskStatus, TaskType,tasksAPI} from "../api/tasks-api";
+import {Dispatch} from "redux";
 
 type RemoveTaskActionType = {
     type: 'REMOVE-TASK'
@@ -29,6 +30,12 @@ type changeTaskTitleActionType = {
     todolistId: string
 }
 
+export type SetTasksActionType = {
+    type: 'SET-TASKS'
+    tasks: Array<TaskType>
+    todolistId: string
+}
+
 type ActionType =
     RemoveTaskActionType
     | AddTaskActionType
@@ -36,7 +43,8 @@ type ActionType =
     | changeTaskTitleActionType
     | AddTodolistActionType
     | RemoveTodolistActionType
-    |SetTodolistsActionType
+    | SetTodolistsActionType
+    | SetTasksActionType
 
 const initialState: TasksStateType = {}
 
@@ -110,8 +118,15 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
             return stateCopy
         }
         case 'SET-TODOLISTS': {
-            const stateCopy={...state}
-            action.todolists.map(tl=>{stateCopy[tl.id]=[]})
+            const stateCopy = {...state}
+            action.todolists.forEach((tl) => {
+                stateCopy[tl.id] = []
+            })
+            return stateCopy;
+        }
+        case 'SET-TASKS': {
+            const stateCopy = {...state}
+            stateCopy[action.todolistId] = action.tasks
             return stateCopy
         }
         default:
@@ -136,5 +151,17 @@ export const changeTaskTitleAC = (taskId: string, todolistTitle: string, todolis
     : changeTaskTitleActionType => {
     return {type: 'CHANGE-TASK-TITLE', taskId, todolistTitle, todolistId}
 }
+export const setTasksAC = (tasks: Array<TaskType>,todolistId: string)
+    : SetTasksActionType => {
+    return {type: 'SET-TASKS',todolistId,tasks}
+}
 
+export const fetchTasksTC:any = (tasks: Array<TaskType>,todolistId: string) => {
+    return (dispatch: Dispatch)=>{tasksAPI.getTasks(todolistId)
+        .then((res) => {
+            const tasks = res.data.items
+            dispatch(setTasksAC(tasks, todolistId))
+        })}
+
+}
 

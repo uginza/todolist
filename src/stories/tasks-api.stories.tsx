@@ -11,7 +11,7 @@ export const GetTasks = () => {
         // здесь мы будем делать запрос и ответ закидывать в стейт.
         // который в виде строки будем отображать в div-ке
         const todolistId ='900a8c4f-d01c-43d0-ac52-c082cf97900f'
-            tasksAPI.GetTasks(todolistId)
+            tasksAPI.getTasks(todolistId)
                 .then((res) => {
                     setState(res.data)
                 })
@@ -22,7 +22,7 @@ export const CreateTasks = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
         const todolistId ='900a8c4f-d01c-43d0-ac52-c082cf97900f'
-        tasksAPI.CreateTasks(todolistId,"buy milk")
+        tasksAPI.createTasks(todolistId,"buy milk")
             .then((res) => {
                 setState(res.data)
             })
@@ -35,7 +35,7 @@ export const DeleteTasks = () => {
     useEffect(() => {
         const todolistID = '900a8c4f-d01c-43d0-ac52-c082cf97900f'
         const taskId='fc10a4c7-bc81-4d85-b786-9afb828771d9'
-        tasksAPI.DeleteTasks(todolistID,taskId)
+        tasksAPI.deleteTasks(todolistID,taskId)
             .then((res) => {
                 setState(res.data)
             })

@@ -10,7 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, removeTasksTC} from "./state/tasks-reducer";
 import {
     addTodolistAC, ChangeFilterType,
     changeTodolistFiltertAC,
@@ -18,8 +18,8 @@ import {
     removeTodolistAC, TodolistDomainType,
 } from "./state/todolists-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import { AppRootState} from "./state/store";
-import {TaskStatus, TaskType} from "./api/tasks-api";
+import {AppRootState} from "./state/store";
+import {tasksAPI, TaskStatus, TaskType} from "./api/tasks-api";
 
 
 export type TasksStateType = {
@@ -28,12 +28,16 @@ export type TasksStateType = {
 
 
 function AppWithRedux() {
-    const dispatch= useDispatch()
+    const dispatch = useDispatch()
     const todolists = useSelector<AppRootState, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootState, TasksStateType>(state => state.tasks)
 
-    useEffect(()=>{dispatch(fetchTodolistTC())},[])
-    useEffect(()=>{dispatch(fetchTodolistTC())},[])
+    useEffect(() => {
+        dispatch(fetchTodolistTC())
+    }, [])
+    useEffect(() => {
+        dispatch(fetchTodolistTC())
+    }, [])
 
     const addTask = useCallback((newTitle: string, todolistId: string) => {
         const action = addTaskAC(newTitle, todolistId)
@@ -41,8 +45,9 @@ function AppWithRedux() {
     }, [dispatch])
 
     const removeTask = useCallback((id: string, todolistId: string) => {
-        const action = removeTaskAC(id, todolistId)
-        dispatch(action)
+
+        const thunk=removeTasksTC(id,todolistId)
+        dispatch(thunk)
     }, [dispatch])
 
     const changeStatus = useCallback((id: string, status: TaskStatus, todolistId: string) => {

@@ -10,7 +10,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, removeTasksTC} from "./state/tasks-reducer";
+import {
+    addTaskAC,
+    addTaskTC,
+    changeTaskStatusAC,
+    changeTaskTitleAC,
+    removeTaskAC,
+    removeTasksTC
+} from "./state/tasks-reducer";
 import {
     addTodolistAC, ChangeFilterType,
     changeTodolistFiltertAC,
@@ -40,8 +47,8 @@ function AppWithRedux() {
     }, [])
 
     const addTask = useCallback((newTitle: string, todolistId: string) => {
-        const action = addTaskAC(newTitle, todolistId)
-        dispatch(action)
+        const thunk=addTaskTC(newTitle,todolistId)
+        dispatch(thunk)
     }, [dispatch])
 
     const removeTask = useCallback((id: string, todolistId: string) => {
@@ -74,6 +81,7 @@ function AppWithRedux() {
         const action = changeTodolistTitleAC(todolistId, newTitle)
         dispatch(action)
     }, [dispatch])
+
     const addTodolist = useCallback((title: string) => {
         const action = addTodolistAC(title)
         dispatch(action)

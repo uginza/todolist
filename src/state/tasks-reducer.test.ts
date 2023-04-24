@@ -158,7 +158,20 @@ test('correct task should be deleted from correct array', () => {
 
 test('correct task should be added to correct array', () => {
 
-    const action = addTaskAC('juce', 'todolistId2')
+    /* const action = addTaskAC('juce', 'todolistId2')*/
+    const action = addTaskAC({
+        id: '3',
+        title: "juce",
+        status: TaskStatus.New,
+        order: 0,
+        completed: false,
+        deadline: '',
+        todoListId: 'todolistId2',
+        startDate: '',
+        description: '',
+        priority: TaskPriority.Low,
+        addedDate: ''
+    })
 
     const endState = tasksReducer(startState, action)
 
@@ -240,12 +253,12 @@ test('Task array should be set when we set todolists', () => {
             id: '1', title: "HTML&CSS", status: TaskStatus.Complited,
             addedDate: '', order: 0, completed: true, deadline: '', todoListId: 'todolistId1',
             startDate: '', description: '', priority: TaskPriority.Low
-        }],'todolistId1')
+        }], 'todolistId1')
 
 
     const endState = tasksReducer({
-        'todolistId1':[],
-        'todolistId2':[]
+        'todolistId1': [],
+        'todolistId2': []
     }, action)
 
     expect(endState['todolistId1'].length).toBe(1)

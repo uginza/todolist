@@ -19,7 +19,7 @@ import {
     removeTasksTC
 } from "./state/tasks-reducer";
 import {
-    addTodolistAC, ChangeFilterType,
+    addTodolistAC, addTodolistTC, ChangeFilterType,
     changeTodolistFiltertAC,
     changeTodolistTitleAC, fetchTodolistTC,
     removeTodolistAC, removeTodolistTC, TodolistDomainType,
@@ -83,8 +83,8 @@ function AppWithRedux() {
     }, [dispatch])
 
     const addTodolist = useCallback((title: string) => {
-        const action = addTodolistAC(title)
-        dispatch(action)
+        const thunk=addTodolistTC(title)
+        dispatch(thunk)
     }, [dispatch])
 
     return (

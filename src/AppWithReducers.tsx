@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from 'react';
+import React, {useReducer} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
@@ -11,7 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./state/tasks-reducer";
+import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC} from "./state/tasks-reducer";
 import {
     addTodolistAC,
     changeTodolistFiltertAC,
@@ -78,12 +78,12 @@ function AppWithReducers() {
     }
 
     function changeStatus(id: string, status:TaskStatus, todolistId: string) {
-        const action = changeTaskStatusAC(id, status, todolistId)
+        const action = updateTaskAC(id, {status}, todolistId)
         dispatchToTasksReducer(action)
     }
 
-    function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
-        const action = changeTaskTitleAC(id, newTitle, todolistId)
+    function changeTaskTitle(id: string, title: string, todolistId: string) {
+        const action = updateTaskAC(id, {title}, todolistId)
         dispatchToTasksReducer(action)
     }
 

@@ -9,6 +9,14 @@ const instance = axios.create({
     },
 })
 
+export type UpdateTaskModelType={
+    description: string
+    title: string
+    status: TaskStatus
+    priority: TaskPriority
+    startDate: string
+    deadline: string
+}
 
 export type TaskType = {
     description: string
@@ -52,11 +60,8 @@ export enum TaskPriority {
 }
 
 export const tasksAPI = {
-    updateTasks(todolistId: string, taskId: string, title: string) {
-        return instance.put<ResponseType<TaskType>>(
-            `todo-lists/${todolistId}/tasks/${taskId}`,
-            {title: title}
-        )
+    updateTasks(taskId: string,model: UpdateTaskModelType,todolistId: string) {
+        return instance.put<ResponseType<TaskType >>(`todo-lists/${todolistId}/tasks/${taskId}`,model)
 
     },
     deleteTasks(todolistId: string, taskId: string) {

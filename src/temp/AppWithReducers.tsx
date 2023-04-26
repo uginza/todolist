@@ -1,6 +1,6 @@
 import React, {useReducer} from 'react';
 import '../App/App.css';
-import {Todolist} from "../Todolist";
+import {Todolist} from "../features/TodolistsList/Todolist/Todolist";
 import {v1} from "uuid";
 import {AddItem} from "../components/AddItemForm/AddItem";
 import AppBar from '@mui/material/AppBar';
@@ -11,14 +11,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC} from "../state/tasks-reducer";
+import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC} from "../features/TodolistsList/Todolist/tasks-reducer";
 import {
     addTodolistAC,
     changeTodolistFiltertAC,
     changeTodolistTitleAC,
     removeTodolistAC,
     todolistsReducer
-} from "../state/todolists-reducer";
+} from "../features/TodolistsList/Todolist/todolists-reducer";
 import {TaskPriority, TaskStatus, TaskType} from "../api/tasks-api";
 
 export type ChangeFilterType = 'all' | 'active' | 'complited'

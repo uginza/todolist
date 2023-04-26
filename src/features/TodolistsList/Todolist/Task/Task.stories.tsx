@@ -1,7 +1,7 @@
 import React from "react";
 import {action} from "@storybook/addon-actions"
 import {Task} from "./Task";
-import {TaskPriority, TaskStatus} from "./api/tasks-api";
+import {TaskPriority, TaskStatus} from "../../../../api/tasks-api";
 
 const removeTaskCallback = action('Task was removed')
 const changeTaskStatusCallback = action('TaskStatus was changed')

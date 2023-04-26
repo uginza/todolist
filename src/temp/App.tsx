@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import '../App/App.css';
-import {Todolist} from "../Todolist";
+import {Todolist} from "../features/TodolistsList/Todolist/Todolist";
 import {v1} from "uuid";
 import {AddItem} from "../components/AddItemForm/AddItem";
 import AppBar from '@mui/material/AppBar';
@@ -12,12 +12,8 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import {TaskPriority, TaskStatus, TaskType} from "../api/tasks-api";
-import {ChangeFilterType, TodolistDomainType} from "../state/todolists-reducer";
-
-
-export type TasksStateType={
-    [key:string]:Array<TaskType>
-}
+import {ChangeFilterType, TodolistDomainType} from "../features/TodolistsList/Todolist/todolists-reducer";
+import {TasksStateType} from "../features/TodolistsList/Todolist/tasks-reducer";
 
 function App() {
     let todolistID1 = v1();

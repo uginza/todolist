@@ -1,8 +1,13 @@
-import {TasksStateType} from "../temp/App";
+
 import {AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType} from "./todolists-reducer";
-import {TaskStatus, TaskType, tasksAPI, UpdateTaskModelType, TaskPriority} from "../api/tasks-api";
+import {TaskStatus, TaskType, tasksAPI, UpdateTaskModelType, TaskPriority} from "../../../api/tasks-api";
 import {Dispatch} from "redux";
-import {AppRootState} from "./store";
+import {AppRootState} from "../../../App/store";
+
+
+export type TasksStateType={
+    [key:string]:Array<TaskType>
+}
 
 export type MainUpdateTaskModelType = {
     description?: string

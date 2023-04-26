@@ -1,4 +1,4 @@
-import {TasksStateType} from "../App";
+import {TasksStateType} from "../temp/App";
 import {AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType} from "./todolists-reducer";
 import {TaskStatus, TaskType, tasksAPI, UpdateTaskModelType, TaskPriority} from "../api/tasks-api";
 import {Dispatch} from "redux";
@@ -75,7 +75,7 @@ export const setTasksAC = (tasks: Array<TaskType>, id: string) => ({
 
 // thunk list
 
-export const fetchTasksTC: any = (todolistId: string) => (dispatch: Dispatch) => {
+export const fetchTasksTC: any = (todolistId: string) => (dispatch: Dispatch<ActionType>) => {
     tasksAPI.getTasks(todolistId)
         .then((res) => {
             const tasks = res.data.items
@@ -83,14 +83,14 @@ export const fetchTasksTC: any = (todolistId: string) => (dispatch: Dispatch) =>
         })
 }
 
-export const removeTasksTC: any = (tasksId: string, todolistId: string) => (dispatch: Dispatch) => {
+export const removeTasksTC: any = (tasksId: string, todolistId: string) => (dispatch: Dispatch<ActionType>) => {
     tasksAPI.deleteTasks(todolistId, tasksId)
         .then(res => {
             const action = removeTaskAC(tasksId, todolistId)
             dispatch(action)
         })
 }
-export const addTaskTC: any = (title: string, todolistId: string) => (dispatch: Dispatch) => {
+export const addTaskTC: any = (title: string, todolistId: string) => (dispatch: Dispatch<ActionType>) => {
     tasksAPI.createTasks(todolistId, title)
         .then(res => {
             const task = res.data.data.item
@@ -99,7 +99,7 @@ export const addTaskTC: any = (title: string, todolistId: string) => (dispatch: 
         })
 }
 export const updateTaskTC: any = (taskId: string, domainModel: MainUpdateTaskModelType, todolistId: string) =>
-    (dispatch: Dispatch, getState: () => AppRootState) => {
+    (dispatch: Dispatch<ActionType>, getState: () => AppRootState) => {
 
 // так как мы обязаны на сервер отправить все св-ва, которые сервер ожидает, а не только
 // те, которые мы хотим обновить, соответственно нам нужно в этом месте взять таску целиком

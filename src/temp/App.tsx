@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import './App.css';
-import {Todolist} from "./Todolist";
+import '../App/App.css';
+import {Todolist} from "../Todolist";
 import {v1} from "uuid";
-import {AddItem} from "./AddItem";
+import {AddItem} from "../components/AddItemForm/AddItem";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -11,8 +11,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {TaskPriority, TaskStatus, TaskType} from "./api/tasks-api";
-import {ChangeFilterType, TodolistDomainType} from "./state/todolists-reducer";
+import {TaskPriority, TaskStatus, TaskType} from "../api/tasks-api";
+import {ChangeFilterType, TodolistDomainType} from "../state/todolists-reducer";
 
 
 export type TasksStateType={

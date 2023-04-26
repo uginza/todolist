@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useCallback, useEffect} from "react";
-import {AddItem} from "./AddItem";
-import {EditableSpan} from "./EditableSpan";
+import {AddItem} from "./components/AddItemForm/AddItem";
+import {EditableSpan} from "./components/EditableSpan/EditableSpan";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from "@mui/material/Button/Button";

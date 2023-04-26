@@ -42,21 +42,21 @@ export const setTodolistsAC = (todolists: TodolistType[]) => ({type: 'SET-TODOLI
 // thunk list
 
 export const fetchTodolistTC: any = () =>
-    (dispatch: Dispatch) => {
+    (dispatch: Dispatch<ActionType>) => {
         todolistAPI.GetTodolists()
             .then((res) => {
                 dispatch(setTodolistsAC(res.data))
             })
     }
 
-export const removeTodolistTC: any = (todolistId: string) => (dispatch: Dispatch) => {
+export const removeTodolistTC: any = (todolistId: string) => (dispatch: Dispatch<ActionType>) => {
     todolistAPI.DeleteTodolist(todolistId)
         .then((res) => {
             dispatch(removeTodolistAC(todolistId))
         })
 }
 
-export const addTodolistTC: any = (title: string) => (dispatch: Dispatch) => {
+export const addTodolistTC: any = (title: string) => (dispatch: Dispatch<ActionType>) => {
     todolistAPI.CreateTodolist(title)
         .then((res) => {
             const todolist = res.data.data.item
@@ -65,7 +65,7 @@ export const addTodolistTC: any = (title: string) => (dispatch: Dispatch) => {
         })
 }
 
-export const changeTodolistTitleTC: any = (todolistId: string, todolistTitle: string) => (dispatch: Dispatch) => {
+export const changeTodolistTitleTC: any = (todolistId: string, todolistTitle: string) => (dispatch: Dispatch<ActionType>) => {
     todolistAPI.updateTodolist(todolistId, todolistTitle)
         .then((res) => {
             const action = changeTodolistTitleAC(todolistId, todolistTitle)

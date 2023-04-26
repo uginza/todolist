@@ -75,7 +75,7 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
         }
         case 'SET-TASKS': {
             const stateCopy = {...state}
-            stateCopy[action.todolistId] = action.tasks
+            stateCopy[action.id] = action.tasks
             return stateCopy
         }
         default:
@@ -83,13 +83,17 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
     }
 }
 
+//action list
+
 export const removeTaskAC = (taskId: string, todolistId: string) => ({
     type: 'REMOVE-TASK', taskId, todolistId}as const)
 export const addTaskAC = (task: TaskType) => ({type: 'ADD-TASK', task}as const)
 export const updateTaskAC = (taskId: string, model: MainUpdateTaskModelType, todolistId: string) => ({
     type: 'UPDATE-TASK', taskId, model, todolistId} as const)
-export const setTasksAC = (tasks: Array<TaskType>, todolistId: string) => ({
-    type: 'SET-TASKS', todolistId, tasks}as const)
+export const setTasksAC = (tasks: Array<TaskType>, id: string) => ({
+    type: 'SET-TASKS', id, tasks}as const)
+
+// thunk list
 
 export const fetchTasksTC: any = (todolistId: string) => {
     return (dispatch: Dispatch) => {

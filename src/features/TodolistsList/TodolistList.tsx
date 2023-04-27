@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootState} from "../App/store";
+import {AppRootState} from "../../App/store";
 import {
     addTodolistTC,
     ChangeFilterType,
@@ -9,14 +9,14 @@ import {
     fetchTodolistTC,
     removeTodolistTC,
     TodolistDomainType
-} from "../features/TodolistsList/Todolist/todolists-reducer";
-import {addTaskTC, removeTasksTC, updateTaskTC} from "../features/TodolistsList/Todolist/tasks-reducer";
-import {TaskStatus} from "../api/tasks-api";
+} from "./Todolist/todolists-reducer";
+import {addTaskTC, removeTasksTC, updateTaskTC} from "./Todolist/tasks-reducer";
+import {TaskStatus} from "../../api/tasks-api";
 import Grid from "@mui/material/Grid";
-import {AddItem} from "../components/AddItemForm/AddItem";
+import {AddItem} from "../../components/AddItemForm/AddItem";
 import Paper from "@mui/material/Paper";
-import {Todolist} from "../features/TodolistsList/Todolist/Todolist";
-import {TasksStateType} from "../App/App";
+import {Todolist} from "./Todolist/Todolist";
+import {TasksStateType} from "../../App/App";
 
 export const TodolistList: React.FC = () => {
     const dispatch = useDispatch()

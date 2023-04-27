@@ -7,7 +7,9 @@ import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import {TaskType} from "../api/tasks-api";
-import {TodolistList} from "../TodolistList/TodolistList";
+import {TodolistList} from "../features/TodolistsList/TodolistList";
+import {LinearProgress} from "@mui/material";
+import {ErrorSnackBar} from "../components/ErrorSnackBar/ErrorSnackBar";
 
 
 export type TasksStateType = {
@@ -20,6 +22,7 @@ function App() {
 
     return (
         <div className="App">
+            <ErrorSnackBar/>
             <AppBar position="static">
                 <Toolbar variant="dense">
                     <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}}>
@@ -29,6 +32,7 @@ function App() {
                         Photos
                     </Typography>
                 </Toolbar>
+                <LinearProgress />
             </AppBar>
             <Container fixed>
                <TodolistList/>

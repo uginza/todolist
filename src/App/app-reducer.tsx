@@ -10,7 +10,7 @@ const initialState:RequestStatusType = {
     error:'some error'
 }
 
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 
 export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
@@ -24,3 +24,6 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
 }
 
 type ActionsType = any
+
+export const setErrorAC=( error:string|null)=>({type:'APP/SET-ERROR',error})
+export const setErrorStatusAC=(status: 'idle' | 'loading' | 'succeeded' | 'failed')=>({type:'APP/SET-STATUS',status})

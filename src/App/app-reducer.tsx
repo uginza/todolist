@@ -7,7 +7,7 @@ export type RequestStatusType = {
 
 const initialState:RequestStatusType = {
     status: 'idle',
-    error:null
+    error:'some error'
 }
 
 type InitialStateType = typeof initialState

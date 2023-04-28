@@ -2,7 +2,7 @@
 import {AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType} from "./todolists-reducer";
 import {TaskStatus, TaskType, tasksAPI, UpdateTaskModelType, TaskPriority} from "../../../api/tasks-api";
 import {Dispatch} from "redux";
-import {AppRootState} from "../../../App/store";
+import {AppRootStateType} from "../../../App/store";
 
 
 export type TasksStateType={
@@ -104,7 +104,7 @@ export const addTaskTC: any = (title: string, todolistId: string) => (dispatch: 
         })
 }
 export const updateTaskTC: any = (taskId: string, domainModel: MainUpdateTaskModelType, todolistId: string) =>
-    (dispatch: Dispatch<ActionType>, getState: () => AppRootState) => {
+    (dispatch: Dispatch<ActionType>, getState: () => AppRootStateType) => {
 
 // так как мы обязаны на сервер отправить все св-ва, которые сервер ожидает, а не только
 // те, которые мы хотим обновить, соответственно нам нужно в этом месте взять таску целиком

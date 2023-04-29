@@ -82,7 +82,7 @@ export const setTasksAC = (tasks: Array<TaskType>, id: string) => ({
 
 // thunk list
 
-export const fetchTasksTC: any = (todolistId: string) => (dispatch: Dispatch<ActionType|SetStatusActionType>) => {
+export const fetchTasksTC: any = (todolistId: string) => (dispatch: Dispatch<ActionType | SetStatusActionType>) => {
     dispatch(setStatusAC("loading"))
     tasksAPI.getTasks(todolistId)
         .then((res) => {
@@ -100,16 +100,18 @@ export const removeTasksTC: any = (tasksId: string, todolistId: string) => (disp
         })
 }
 export const addTaskTC: any = (title: string, todolistId: string) => (dispatch: Dispatch<ActionType
-    | SetErrorActionType>) => {
+    | SetErrorActionType | SetStatusActionType>) => {
+    dispatch(setStatusAC("loading"))
     tasksAPI.createTasks(todolistId, title)
         .then(res => {
             if (res.data.resultCode === 0) {
                 const task = res.data.data.item
                 const action = addTaskAC(task)
                 dispatch(action)
+                dispatch(setStatusAC("succeeded"))
             } else if (res.data.messages.length) {
                 dispatch(setErrorAC(res.data.messages[0]))
-            }else{
+            } else {
                 dispatch(setErrorAC('some error occurred'))
             }
         })

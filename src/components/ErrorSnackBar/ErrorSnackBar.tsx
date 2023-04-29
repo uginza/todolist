@@ -31,7 +31,7 @@ export function ErrorSnackBar() {
     };
 
     const error=useSelector<AppRootStateType,string|null>(state=>state.app.error)
-    const isOpen=error === null
+    const isOpen=error !== null
 
     return (
         <Stack spacing={2} sx={{ width: '100%' }}>

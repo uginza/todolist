@@ -10,6 +10,9 @@ import {TaskType} from "../api/tasks-api";
 import {TodolistList} from "../features/TodolistsList/TodolistList";
 import {LinearProgress} from "@mui/material";
 import {ErrorSnackBar} from "../components/ErrorSnackBar/ErrorSnackBar";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "./store";
+import {RequestStatusType} from "./app-reducer";
 
 
 export type TasksStateType = {
@@ -19,6 +22,7 @@ export type TasksStateType = {
 
 function App() {
 
+    const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
 
     return (
         <div className="App">
@@ -32,10 +36,10 @@ function App() {
                         Photos
                     </Typography>
                 </Toolbar>
-                <LinearProgress />
+                {status === 'loading' && <LinearProgress/>}
             </AppBar>
             <Container fixed>
-               <TodolistList/>
+                <TodolistList/>
             </Container>
         </div>
     );

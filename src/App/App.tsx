@@ -19,8 +19,11 @@ export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
+type TodolistListPropsType={
+    demo?:boolean
+}
 
-function App() {
+function App({demo=false}:TodolistListPropsType) {
 
     const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
 
@@ -39,7 +42,7 @@ function App() {
                 {status === 'loading' && <LinearProgress/>}
             </AppBar>
             <Container fixed>
-                <TodolistList/>
+                <TodolistList demo={demo}/>
             </Container>
         </div>
     );

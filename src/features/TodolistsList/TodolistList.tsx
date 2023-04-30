@@ -18,15 +18,19 @@ import Paper from "@mui/material/Paper";
 import {Todolist} from "./Todolist/Todolist";
 import {TasksStateType} from "../../App/App";
 
-export const TodolistList: React.FC = () => {
+type TodolistListPropsType={
+    demo?:boolean
+}
+
+export const TodolistList: React.FC<TodolistListPropsType> = ({demo=false}) => {
     const dispatch = useDispatch()
     const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
     const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
 
     useEffect(() => {
-        dispatch(fetchTodolistTC())
-    }, [])
-    useEffect(() => {
+        if(demo){
+            return
+        }
         dispatch(fetchTodolistTC())
     }, [])
 
@@ -92,6 +96,7 @@ export const TodolistList: React.FC = () => {
                             changeTodolistTitle={changeTodolistTitle}
                             filter={tl.filter}
                             removeTodolist={removeTodolist}
+                            demo={demo}
                         />
                     </Paper>
                 </Grid>)

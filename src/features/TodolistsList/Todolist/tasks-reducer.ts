@@ -5,6 +5,9 @@ import {AppRootStateType} from "../../../App/store";
 import {setErrorAC, SetErrorActionType, setStatusAC, SetStatusActionType} from "../../../App/app-reducer";
 
 
+export type ThunkDispatchType=Dispatch<ActionType
+    | SetErrorActionType | SetStatusActionType>
+
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
@@ -82,7 +85,7 @@ export const setTasksAC = (tasks: Array<TaskType>, id: string) => ({
 
 // thunk list
 
-export const fetchTasksTC: any = (todolistId: string) => (dispatch: Dispatch<ActionType | SetStatusActionType>) => {
+export const fetchTasksTC: any = (todolistId: string) => (dispatch: ThunkDispatchType) => {
     dispatch(setStatusAC("loading"))
     tasksAPI.getTasks(todolistId)
         .then((res) => {
@@ -99,8 +102,7 @@ export const removeTasksTC: any = (tasksId: string, todolistId: string) => (disp
             dispatch(action)
         })
 }
-export const addTaskTC: any = (title: string, todolistId: string) => (dispatch: Dispatch<ActionType
-    | SetErrorActionType | SetStatusActionType>) => {
+export const addTaskTC: any = (title: string, todolistId: string) => (dispatch:ThunkDispatchType ) => {
     dispatch(setStatusAC("loading"))
     tasksAPI.createTasks(todolistId, title)
         .then(res => {
@@ -113,6 +115,7 @@ export const addTaskTC: any = (title: string, todolistId: string) => (dispatch: 
                 dispatch(setErrorAC(res.data.messages[0]))
             } else {
                 dispatch(setErrorAC('some error occurred'))
+                dispatch(setErrorAC('failed'))
             }
         })
 }

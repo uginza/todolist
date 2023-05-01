@@ -18,6 +18,7 @@ export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
+
 export type MainUpdateTaskModelType = {
     description?: string
     title?: string
@@ -120,11 +121,11 @@ export const addTaskTC: any = (title: string, todolistId: string) => (dispatch: 
                 dispatch(action)
                 dispatch(setAppStatusAC("succeeded"))
             } else {
-                handleServerAppError(res.data,dispatch)
+                handleServerAppError(res.data, dispatch)
             }
         })
         .catch((error) => {
-            handleServerNetworkError(error,dispatch)
+            handleServerNetworkError(error, dispatch)
         })
 
 }
@@ -156,11 +157,11 @@ export const updateTaskTC: any = (taskId: string, domainModel: MainUpdateTaskMod
                         const action = updateTaskAC(taskId, domainModel, todolistId)
                         dispatch(action)
                     } else {
-                        handleServerAppError(res.data,dispatch)
+                        handleServerAppError(res.data, dispatch)
                     }
                 })
                 .catch((error) => {
-                    handleServerNetworkError(error,dispatch)
+                    handleServerNetworkError(error, dispatch)
                 })
         }
     }

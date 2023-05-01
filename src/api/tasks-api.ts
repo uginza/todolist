@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {RequestStatusType} from "../App/app-reducer";
 
 // api
 
@@ -12,8 +13,8 @@ const instance = axios.create({
 })
 
 export const tasksAPI = {
-    updateTasks(taskId: string,model: UpdateTaskModelType,todolistId: string) {
-        return instance.put<ResponseType<TaskType >>(`todo-lists/${todolistId}/tasks/${taskId}`,model)
+    updateTasks(taskId: string, model: UpdateTaskModelType, todolistId: string) {
+        return instance.put<ResponseType<TaskType>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
 
     },
     deleteTasks(todolistId: string, taskId: string) {
@@ -22,7 +23,7 @@ export const tasksAPI = {
         )
     },
     createTasks(todolistId: string, title: string) {
-        return instance.post<ResponseType<{ item:TaskType }>>(
+        return instance.post<ResponseType<{ item: TaskType }>>(
             `todo-lists/${todolistId}/tasks`,
             {title: title}
         )
@@ -35,7 +36,7 @@ export const tasksAPI = {
 
 // types
 
-export type UpdateTaskModelType={
+export type UpdateTaskModelType = {
     description: string
     title: string
     status: TaskStatus
@@ -56,6 +57,7 @@ export type TaskType = {
     todoListId: string
     order: number
     addedDate: string
+    entityStatus: string
 }
 
 type GetTaskType = {

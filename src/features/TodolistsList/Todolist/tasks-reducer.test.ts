@@ -10,7 +10,7 @@ beforeEach(() => {
             {
                 id: '1', title: "HTML&CSS", status: TaskStatus.Complited,
                 addedDate: '', order: 0, completed: true, deadline: '', todoListId: 'todolistId1',
-                startDate: '', description: '', priority: TaskPriority.Low
+                startDate: '', description: '', priority: TaskPriority.Low, entityStatus: 'idle'
             },
             {
                 id: '2',
@@ -24,6 +24,7 @@ beforeEach(() => {
                 description: '',
                 priority: TaskPriority.Low,
                 addedDate: ''
+                , entityStatus: 'idle'
             },
             {
                 id: '3',
@@ -37,6 +38,7 @@ beforeEach(() => {
                 description: '',
                 priority: TaskPriority.Low,
                 addedDate: ''
+                , entityStatus: 'idle'
             }
         ],
         'todolistId2': [
@@ -51,7 +53,8 @@ beforeEach(() => {
                 todoListId: 'todolistId2',
                 startDate: '',
                 description: '',
-                priority: TaskPriority.Low
+                priority: TaskPriority.Low,
+                entityStatus: 'idle'
             },
             {
                 id: '2',
@@ -65,6 +68,7 @@ beforeEach(() => {
                 description: '',
                 priority: TaskPriority.Low,
                 addedDate: ''
+                , entityStatus: 'idle'
             },
             {
                 id: '3',
@@ -77,7 +81,8 @@ beforeEach(() => {
                 startDate: '',
                 description: '',
                 priority: TaskPriority.Low,
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             }
         ]
     }
@@ -168,7 +173,8 @@ test('correct task should be added to correct array', () => {
         startDate: '',
         description: '',
         priority: TaskPriority.Low,
-        addedDate: ''
+        addedDate: '',
+        entityStatus: 'idle'
     })
 
     const endState = tasksReducer(startState, action)
@@ -202,7 +208,7 @@ test('task title of specified task should be changed', () => {
 
 test('new array should be added when new todolist is added', () => {
 
-    const action = addTodolistAC({id: '2', title: 'What to learn', addedDate: '',entityStatus: 'idle', order: 0})
+    const action = addTodolistAC({id: '2', title: 'What to learn', addedDate: '', entityStatus: 'idle', order: 0})
 
     const endState = tasksReducer(startState, action)
 
@@ -233,8 +239,8 @@ test('property with todolistId should be deleted', () => {
 
 test('Empty array should be set when we set todolists', () => {
     const action = setTodolistsAC([
-        {id: '1', title: 'What to learn', addedDate: '',entityStatus: 'idle', order: 0},
-        {id: '2', title: 'What to buy', addedDate: '',entityStatus: 'idle', order: 0}
+        {id: '1', title: 'What to learn', addedDate: '', entityStatus: 'idle', order: 0},
+        {id: '2', title: 'What to buy', addedDate: '', entityStatus: 'idle', order: 0}
     ])
 
     const endState = tasksReducer({}, action)
@@ -250,7 +256,8 @@ test('Task array should be set when we set todolists', () => {
         [{
             id: '1', title: "HTML&CSS", status: TaskStatus.Complited,
             addedDate: '', order: 0, completed: true, deadline: '', todoListId: 'todolistId1',
-            startDate: '', description: '', priority: TaskPriority.Low
+            startDate: '', description: '', priority: TaskPriority.Low,
+            entityStatus: 'idle'
         }], 'todolistId1')
 
 

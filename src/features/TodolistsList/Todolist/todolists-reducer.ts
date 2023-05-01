@@ -1,5 +1,4 @@
 import {todolistAPI, TodolistType} from "../../../api/ todolist-api";
-import {Dispatch} from "redux";
 import {RequestStatusType, setAppStatusAC} from "../../../App/app-reducer";
 import {ThunkDispatchType} from "./tasks-reducer";
 

@@ -75,7 +75,9 @@ export const Todolist = React.memo(({demo=false,...props}: TodolistPropsType) =>
                           task={el}
                           changeTaskStatus={props.changeTaskStatus}
                           changeTaskTitle={props.changeTaskTitle}
-                          todolistId={props.todolist.id}/>)}
+                          todolistId={props.todolist.id}
+                          disabled={props.todolist.entityStatus==='loading'}
+                    />)}
             </div>
             <div>
                 <Button variant={props.todolist.filter === "all" ? "contained" : "text"} onClick={onAllClick}>All</Button>

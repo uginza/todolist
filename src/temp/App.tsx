@@ -31,7 +31,8 @@ function App() {
                     todoListId: todolistID1,
                     startDate: '',
                     description: '',
-                    priority: TaskPriority.Low
+                    priority: TaskPriority.Low,
+                    entityStatus: 'idle'
                 },
                 {
                     id: v1(),
@@ -44,7 +45,8 @@ function App() {
                     startDate: '',
                     description: '',
                     priority: TaskPriority.Low,
-                    addedDate: ''
+                    addedDate: '',
+                    entityStatus: 'idle'
                 },
                 {
                     id: v1(),
@@ -57,7 +59,8 @@ function App() {
                     startDate: '',
                     description: '',
                     priority: TaskPriority.Low,
-                    addedDate: ''
+                    addedDate: '',
+                    entityStatus: 'idle'
                 },
                 {
                     id: v1(),
@@ -70,7 +73,8 @@ function App() {
                     startDate: '',
                     description: '',
                     priority: TaskPriority.Low,
-                    addedDate: ''
+                    addedDate: '',
+                    entityStatus: 'idle'
                 },
                 {
                     id: v1(),
@@ -83,7 +87,8 @@ function App() {
                     startDate: '',
                     description: '',
                     priority: TaskPriority.Low,
-                    addedDate: ''
+                    addedDate: '',
+                    entityStatus: 'idle'
                 }
             ],
             [todolistID2]: [
@@ -98,7 +103,8 @@ function App() {
                     startDate: '',
                     description: '',
                     priority: TaskPriority.Low,
-                    addedDate: ''
+                    addedDate: '',
+                    entityStatus: 'idle'
                 },
                 {
                     id: v1(),
@@ -111,7 +117,8 @@ function App() {
                     startDate: '',
                     description: '',
                     priority: TaskPriority.Low,
-                    addedDate: ''
+                    addedDate: '',
+                    entityStatus: 'idle'
                 },
                 {
                     id: v1(),
@@ -124,7 +131,8 @@ function App() {
                     startDate: '',
                     description: '',
                     priority: TaskPriority.Low,
-                    addedDate: ''
+                    addedDate: '',
+                    entityStatus: 'idle'
                 }
             ]
         }
@@ -146,7 +154,8 @@ function App() {
             startDate: '',
             description: '',
             priority: TaskPriority.Low,
-            addedDate: ''
+            addedDate: '',
+            entityStatus: 'idle'
         }
         let todolistTasks = tasks[todolistId]
         tasks[todolistId] = [newTask, ...todolistTasks]

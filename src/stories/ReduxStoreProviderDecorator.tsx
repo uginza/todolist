@@ -34,7 +34,8 @@ const initialGlobalState = {
                 todoListId: 'todolistId1',
                 startDate: '',
                 description: '',
-                priority: TaskPriority.Low
+                priority: TaskPriority.Low,
+                entityStatus: 'idle'
             },
             {
                 id: v1(),
@@ -47,7 +48,8 @@ const initialGlobalState = {
                 startDate: '',
                 description: '',
                 priority: TaskPriority.Low,
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             },
             {
                 id: v1(),
@@ -60,7 +62,8 @@ const initialGlobalState = {
                 startDate: '',
                 description: '',
                 priority: TaskPriority.Low,
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             },
             {
                 id: v1(),
@@ -73,7 +76,8 @@ const initialGlobalState = {
                 startDate: '',
                 description: '',
                 priority: TaskPriority.Low,
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             },
             {
                 id: v1(),
@@ -86,7 +90,8 @@ const initialGlobalState = {
                 startDate: '',
                 description: '',
                 priority: TaskPriority.Low,
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             }
         ],
         ['todolistId2']: [
@@ -101,7 +106,8 @@ const initialGlobalState = {
                 startDate: '',
                 description: '',
                 priority: TaskPriority.Low,
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             },
             {
                 id: v1(),
@@ -114,7 +120,8 @@ const initialGlobalState = {
                 startDate: '',
                 description: '',
                 priority: TaskPriority.Low,
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             },
             {
                 id: v1(),
@@ -127,7 +134,8 @@ const initialGlobalState = {
                 startDate: '',
                 description: '',
                 priority: TaskPriority.Low,
-                addedDate: ''
+                addedDate: '',
+                entityStatus: 'idle'
             }
         ]
     },

@@ -15,13 +15,13 @@ export default {
 export const TaskExample = (props: any) => {
     return <>
         <Task removeTask={removeTaskCallback}
-              task={{id: '1', status:TaskStatus.Complited, title: 'CSS',addedDate:'',order:0,completed:true,deadline:'',todoListId:'todolistID1',startDate:'',description:'',priority:TaskPriority.Low}}
+              task={{id: '1', status:TaskStatus.Complited, title: 'CSS',addedDate:'',order:0,completed:true,deadline:'',todoListId:'todolistID1',startDate:'',description:'',priority:TaskPriority.Low,entityStatus: 'idle'}}
               changeTaskStatus={changeTaskStatusCallback}
               changeTaskTitle={changeTaskTitleCallback}
               todolistId={'todolistId1'}/>
 
         <Task removeTask={removeTaskCallback}
-              task={{id: '2', status:TaskStatus.Complited, title: 'React',addedDate:'',order:0,completed:true,deadline:'',todoListId:'todolistID1',startDate:'',description:'',priority:TaskPriority.Low}}
+              task={{id: '2', status:TaskStatus.Complited, title: 'React',addedDate:'',order:0,completed:true,deadline:'',todoListId:'todolistID1',startDate:'',description:'',priority:TaskPriority.Low,entityStatus: 'idle'}}
               changeTaskStatus={changeTaskStatusCallback}
               changeTaskTitle={changeTaskTitleCallback}
               todolistId={'todolistId2'}/>

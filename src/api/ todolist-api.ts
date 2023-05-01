@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {RequestStatusType} from "../App/app-reducer";
 
 // api
 
@@ -46,7 +47,8 @@ export type TodolistType={
     id:string,
     title:string,
     addedDate:string,
-    order:number
+    order:number,
+    entityStatus:RequestStatusType
 }
 
 export type ResponseType<D> = {

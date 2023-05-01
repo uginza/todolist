@@ -10,8 +10,8 @@ import {AppRootStateType} from "../../../App/store";
 import {setAppErrorAC, SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../../App/app-reducer";
 
 
-export type ThunkDispatchType=Dispatch<TasksReducerActionType
-    | SetAppErrorActionType | SetAppStatusActionType|TodolistActionType>
+export type ThunkDispatchType = Dispatch<TasksReducerActionType
+    | SetAppErrorActionType | SetAppStatusActionType | TodolistActionType>
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>
@@ -107,7 +107,7 @@ export const removeTasksTC: any = (tasksId: string, todolistId: string) => (disp
             dispatch(action)
         })
 }
-export const addTaskTC: any = (title: string, todolistId: string) => (dispatch:ThunkDispatchType ) => {
+export const addTaskTC: any = (title: string, todolistId: string) => (dispatch: ThunkDispatchType) => {
     dispatch(setAppStatusAC("loading"))
     tasksAPI.createTasks(todolistId, title)
         .then(res => {
@@ -123,9 +123,14 @@ export const addTaskTC: any = (title: string, todolistId: string) => (dispatch:T
                 dispatch(setAppErrorAC('failed'))
             }
         })
+        .catch((error) => {
+            dispatch(setAppErrorAC('some error occurred'))
+            dispatch(setAppErrorAC('failed'))
+        })
+
 }
 export const updateTaskTC: any = (taskId: string, domainModel: MainUpdateTaskModelType, todolistId: string) =>
-    (dispatch: Dispatch<TasksReducerActionType>, getState: () => AppRootStateType) => {
+    (dispatch: ThunkDispatchType, getState: () => AppRootStateType) => {
 
 // так как мы обязаны на сервер отправить все св-ва, которые сервер ожидает, а не только
 // те, которые мы хотим обновить, соответственно нам нужно в этом месте взять таску целиком
@@ -147,9 +152,20 @@ export const updateTaskTC: any = (taskId: string, domainModel: MainUpdateTaskMod
                 ...domainModel
             }
             tasksAPI.updateTasks(taskId, apiModel, todolistId)
-                .then(() => {
-                    const action = updateTaskAC(taskId, domainModel, todolistId)
-                    dispatch(action)
+                .then((res) => {
+                    if (res.data.resultCode === 0) {
+                        const action = updateTaskAC(taskId, domainModel, todolistId)
+                        dispatch(action)
+                    } else if (res.data.messages.length) {
+                        dispatch(setAppErrorAC(res.data.messages[0]))
+                    } else {
+                        dispatch(setAppErrorAC('some error occurred'))
+                        dispatch(setAppErrorAC('failed'))
+                    }
+                })
+                .catch((error) => {
+                    dispatch(setAppErrorAC('some error occurred'))
+                    dispatch(setAppErrorAC('failed'))
                 })
         }
     }

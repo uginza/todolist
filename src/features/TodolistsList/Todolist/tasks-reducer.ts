@@ -4,10 +4,10 @@ import {
     SetTodolistsActionType,
     TodolistActionType
 } from "./todolists-reducer";
-import {TaskStatus, TaskType, tasksAPI, UpdateTaskModelType, TaskPriority} from "../../../api/tasks-api";
+import {TaskPriority, tasksAPI, TaskStatus, TaskType, UpdateTaskModelType} from "../../../api/tasks-api";
 import {Dispatch} from "redux";
 import {AppRootStateType} from "../../../App/store";
-import {setAppErrorAC, SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../../App/app-reducer";
+import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../../App/app-reducer";
 import {handleServerAppError, handleServerNetworkError} from "../../../utils/errorUtils";
 
 
@@ -101,11 +101,13 @@ export const fetchTasksTC: any = (todolistId: string) => (dispatch: ThunkDispatc
         })
 }
 
-export const removeTasksTC: any = (tasksId: string, todolistId: string) => (dispatch: Dispatch<TasksReducerActionType>) => {
+export const removeTasksTC: any = (tasksId: string, todolistId: string) => (dispatch: ThunkDispatchType) => {
+    dispatch(setAppStatusAC("loading"))
     tasksAPI.deleteTasks(todolistId, tasksId)
         .then(res => {
             const action = removeTaskAC(tasksId, todolistId)
             dispatch(action)
+            dispatch(setAppStatusAC("succeeded"))
         })
 }
 export const addTaskTC: any = (title: string, todolistId: string) => (dispatch: ThunkDispatchType) => {

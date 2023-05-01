@@ -37,7 +37,7 @@ export const Todolist = React.memo(({demo=false,...props}: TodolistPropsType) =>
     const onActiveClick = useCallback(() => {
         props.changeFilter('active', props.todolist.id)
     }, [props.changeFilter, props.todolist.id])
-    const onComplitedClick = useCallback(() => {
+    const onCompletedClick = useCallback(() => {
         props.changeFilter('complited', props.todolist.id)
     }, [props.changeFilter, props.todolist.id])
     const removeTodolistHandler = () => {
@@ -60,7 +60,7 @@ export const Todolist = React.memo(({demo=false,...props}: TodolistPropsType) =>
 
     return (
         <div>
-            <h3><EditableSpan title={props.todolist.title} onChange={changeTodolistTitle}/>
+            <h3><EditableSpan title={props.todolist.title} onChange={changeTodolistTitle} disabled={props.todolist.entityStatus==='loading'}/>
                 <IconButton disabled={props.todolist.entityStatus==='loading'} onClick={removeTodolistHandler} aria-label="delete">
                     <DeleteIcon/>
                 </IconButton>
@@ -83,7 +83,7 @@ export const Todolist = React.memo(({demo=false,...props}: TodolistPropsType) =>
                         onClick={onActiveClick}>Active
                 </Button>
                 <Button variant={props.todolist.filter === "complited" ? "contained" : "text"} color={"secondary"}
-                        onClick={onComplitedClick}>Completed
+                        onClick={onCompletedClick}>Completed
                 </Button>
             </div>
         </div>

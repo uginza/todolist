@@ -13,38 +13,45 @@ import {ErrorSnackBar} from "../components/ErrorSnackBar/ErrorSnackBar";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "./store";
 import {RequestStatusType} from "./app-reducer";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Login} from "../features/Login/Login";
 
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-type TodolistListPropsType={
-    demo?:boolean
+type TodolistListPropsType = {
+    demo?: boolean
 }
 
-function App({demo=false}:TodolistListPropsType) {
+function App({demo = false}: TodolistListPropsType) {
 
     const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
 
     return (
-        <div className="App">
-            <ErrorSnackBar/>
-            <AppBar position="static">
-                <Toolbar variant="dense">
-                    <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}}>
-                        <MenuIcon/>
-                    </IconButton>
-                    <Typography variant="h6" color="inherit" component="div">
-                        Photos
-                    </Typography>
-                </Toolbar>
-                {status === 'loading' && <LinearProgress/>}
-            </AppBar>
-            <Container fixed>
-                <TodolistList demo={demo}/>
-            </Container>
-        </div>
+        <BrowserRouter>
+            <div className="App">
+                <ErrorSnackBar/>
+                <AppBar position="static">
+                    <Toolbar variant="dense">
+                        <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}}>
+                            <MenuIcon/>
+                        </IconButton>
+                        <Typography variant="h6" color="inherit" component="div">
+                            Photos
+                        </Typography>
+                    </Toolbar>
+                    {status === 'loading' && <LinearProgress/>}
+                </AppBar>
+                <Container fixed>
+                    <Routes>
+                    <Route path={'/'} element={<TodolistList demo={demo}/>}/>
+                    <Route path={'/login'} element={<Login />}/>
+                    </Routes>
+                </Container>
+            </div>
+        </BrowserRouter>
     );
 }
 

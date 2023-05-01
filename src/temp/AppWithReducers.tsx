@@ -51,8 +51,8 @@ function AppWithReducers() {
         }
     )
     let [todolists, dispatchToTodolistsReducer] = useReducer(todolistsReducer, [
-        {id: todolistID1, title: 'What to learn', filter: 'all',addedDate:'',order:0},
-        {id: todolistID2, title: 'What to buy', filter: 'all',addedDate:'',order:0}
+        {id: todolistID1, title: 'What to learn', filter: 'all',addedDate:'',entityStatus: 'idle',order:0},
+        {id: todolistID2, title: 'What to buy', filter: 'all',addedDate:'',entityStatus: 'idle',order:0}
     ])
 
     const addTask = (newTitle: string, todolistId: string) => {
@@ -103,7 +103,7 @@ function AppWithReducers() {
         dispatchToTodolistsReducer(action)
 }
         function addTodolist(title: string) {
-            const action = addTodolistAC( {id: todolistID1, title:title,addedDate:'',order:0})
+            const action = addTodolistAC( {id: todolistID1, title:title,addedDate:'',entityStatus: 'idle',order:0})
             dispatchToTodolistsReducer(action)
             dispatchToTasksReducer(action)
         }
@@ -136,9 +136,8 @@ function AppWithReducers() {
                                 return <Grid item>
                                     <Paper style={{padding: '10px'}}>
                                         <Todolist
+                                            todolist={tl}
                                             key={tl.id}
-                                            id={tl.id}
-                                            title={tl.title}
                                             tasks={tasksForTodolist}
                                             removeTask={removeTask}
                                             addTask={addTask}
@@ -146,7 +145,6 @@ function AppWithReducers() {
                                             changeTaskStatus={changeStatus}
                                             changeTaskTitle={changeTaskTitle}
                                             changeTodolistTitle={changeTodolistTitle}
-                                            filter={tl.filter}
                                             removeTodolist={removeTodolist}
                                         />
                                     </Paper>

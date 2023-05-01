@@ -65,6 +65,7 @@ export const removeTodolistTC: any = (todolistId: string) => (dispatch: ThunkDis
     todolistAPI.DeleteTodolist(todolistId)
         .then((res) => {
             dispatch(removeTodolistAC(todolistId))
+            dispatch(setAppStatusAC('succeeded'))
         })
 }
 

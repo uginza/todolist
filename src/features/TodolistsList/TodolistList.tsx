@@ -85,8 +85,7 @@ export const TodolistList: React.FC<TodolistListPropsType> = ({demo=false}) => {
                 return (<Grid item key={tl.id}>
                     <Paper style={{padding: '10px'}}>
                         <Todolist
-                            id={tl.id}
-                            title={tl.title}
+                            todolist={tl}
                             tasks={tasksForTodolist}
                             removeTask={removeTask}
                             addTask={addTask}
@@ -94,7 +93,6 @@ export const TodolistList: React.FC<TodolistListPropsType> = ({demo=false}) => {
                             changeTaskStatus={changeStatus}
                             changeTaskTitle={changeTaskTitle}
                             changeTodolistTitle={changeTodolistTitle}
-                            filter={tl.filter}
                             removeTodolist={removeTodolist}
                             demo={demo}
                         />

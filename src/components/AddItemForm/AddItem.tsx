@@ -7,9 +7,10 @@ import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 
 type AddItemPropsType = {
     addItem: (newTitle: string) => void;
+    disabled?: boolean
 }
 
-export const AddItem=React.memo((props: AddItemPropsType) =>{
+export const AddItem = React.memo(({addItem, disabled = false}: AddItemPropsType) => {
     console.log("AddItem is called")
 
     const [title, setTitle] = useState('')
@@ -31,7 +32,7 @@ export const AddItem=React.memo((props: AddItemPropsType) =>{
 
     const addTask = () => {
         if (title.trim() !== "") {
-            props.addItem(title.trim())
+            addItem(title.trim())
             setTitle('');
         } else {
             setError("Title is required")
@@ -52,16 +53,18 @@ export const AddItem=React.memo((props: AddItemPropsType) =>{
                className={error ? "error" : ""}
                onChange={onChangeHandler}
                onKeyPress={onKeyPressHandler}/>*/}
-        <TextField size="small"
-                   id="standard-basic"
-                   label="Type title"
-                   variant="outlined"
-                   value={title}
-                   error={!!error}
-                   helperText={error}
-                   onChange={onChangeHandler}
-                   onKeyPress={onKeyPressHandler}/>
+        <TextField
+            size="small"
+            disabled={disabled}
+            id="standard-basic"
+            label="Type title"
+            variant="outlined"
+            value={title}
+            error={!!error}
+            helperText={error}
+            onChange={onChangeHandler}
+            onKeyPress={onKeyPressHandler}/>
         {/*<button onClick={addTask}>+</button>*/}
-        <IconButton color="secondary" style={buttonSettings} onClick={addTask}><AddCircle/></IconButton>
+        <IconButton disabled={disabled} color="secondary" style={buttonSettings} onClick={addTask}><AddCircle/></IconButton>
     </div>)
 })

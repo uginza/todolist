@@ -12,3 +12,6 @@ export default{
 export const AddItemEx=()=>{
     return <AddItem addItem={callback}/>
 }
+export const AddItemDisabledEx=()=>{
+    return <AddItem disabled={true} addItem={callback}/>
+}

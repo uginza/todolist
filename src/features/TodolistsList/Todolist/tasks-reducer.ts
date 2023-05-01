@@ -8,6 +8,7 @@ import {TaskStatus, TaskType, tasksAPI, UpdateTaskModelType, TaskPriority} from 
 import {Dispatch} from "redux";
 import {AppRootStateType} from "../../../App/store";
 import {setAppErrorAC, SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../../App/app-reducer";
+import {handleServerAppError} from "../../../utils/errorUtils";
 
 
 export type ThunkDispatchType = Dispatch<TasksReducerActionType
@@ -116,11 +117,8 @@ export const addTaskTC: any = (title: string, todolistId: string) => (dispatch: 
                 const action = addTaskAC(task)
                 dispatch(action)
                 dispatch(setAppStatusAC("succeeded"))
-            } else if (res.data.messages.length) {
-                dispatch(setAppErrorAC(res.data.messages[0]))
             } else {
-                dispatch(setAppErrorAC('some error occurred'))
-                dispatch(setAppErrorAC('failed'))
+                handleServerAppError(res.data,dispatch)
             }
         })
         .catch((error) => {
@@ -156,11 +154,8 @@ export const updateTaskTC: any = (taskId: string, domainModel: MainUpdateTaskMod
                     if (res.data.resultCode === 0) {
                         const action = updateTaskAC(taskId, domainModel, todolistId)
                         dispatch(action)
-                    } else if (res.data.messages.length) {
-                        dispatch(setAppErrorAC(res.data.messages[0]))
                     } else {
-                        dispatch(setAppErrorAC('some error occurred'))
-                        dispatch(setAppErrorAC('failed'))
+                        handleServerAppError(res.data,dispatch)
                     }
                 })
                 .catch((error) => {

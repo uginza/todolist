@@ -30,7 +30,7 @@ test('correct todolist should be removed', () => {
 
 test('correct todolist should be added', () => {
 
-    let newTodolist = {id: '3', title: 'Pay a visit to granny', addedDate: '', order: 0}
+    let newTodolist = {id: '3', title: 'Pay a visit to granny', addedDate: '', entityStatus: "idle", order: 0}
 
     const endState = todolistsReducer(startState, addTodolistAC(newTodolist))
 

@@ -1,12 +1,17 @@
-import {AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType} from "./todolists-reducer";
+import {
+    AddTodolistActionType,
+    RemoveTodolistActionType,
+    SetTodolistsActionType,
+    TodolistActionType
+} from "./todolists-reducer";
 import {TaskStatus, TaskType, tasksAPI, UpdateTaskModelType, TaskPriority} from "../../../api/tasks-api";
 import {Dispatch} from "redux";
 import {AppRootStateType} from "../../../App/store";
-import {setErrorAC, SetErrorActionType, setStatusAC, SetStatusActionType} from "../../../App/app-reducer";
+import {setAppErrorAC, SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../../App/app-reducer";
 
 
-export type ThunkDispatchType=Dispatch<ActionType
-    | SetErrorActionType | SetStatusActionType>
+export type ThunkDispatchType=Dispatch<TasksReducerActionType
+    | SetAppErrorActionType | SetAppStatusActionType|TodolistActionType>
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>
@@ -22,7 +27,7 @@ export type MainUpdateTaskModelType = {
 }
 
 
-type ActionType = ReturnType<typeof removeTaskAC>
+type TasksReducerActionType = ReturnType<typeof removeTaskAC>
     | ReturnType<typeof addTaskAC>
     | ReturnType<typeof updateTaskAC>
     | AddTodolistActionType
@@ -33,7 +38,7 @@ type ActionType = ReturnType<typeof removeTaskAC>
 const initialState: TasksStateType = {}
 
 
-export const tasksReducer = (state: TasksStateType = initialState, action: ActionType): TasksStateType => {
+export const tasksReducer = (state: TasksStateType = initialState, action: TasksReducerActionType): TasksStateType => {
     switch (action.type) {
         case 'REMOVE-TASK':
             return {...state, [action.todolistId]: state[action.todolistId].filter(t => t.id !== action.taskId)}
@@ -86,16 +91,16 @@ export const setTasksAC = (tasks: Array<TaskType>, id: string) => ({
 // thunk list
 
 export const fetchTasksTC: any = (todolistId: string) => (dispatch: ThunkDispatchType) => {
-    dispatch(setStatusAC("loading"))
+    dispatch(setAppStatusAC("loading"))
     tasksAPI.getTasks(todolistId)
         .then((res) => {
             const tasks = res.data.items
             dispatch(setTasksAC(tasks, todolistId))
-            dispatch(setStatusAC("succeeded"))
+            dispatch(setAppStatusAC("succeeded"))
         })
 }
 
-export const removeTasksTC: any = (tasksId: string, todolistId: string) => (dispatch: Dispatch<ActionType>) => {
+export const removeTasksTC: any = (tasksId: string, todolistId: string) => (dispatch: Dispatch<TasksReducerActionType>) => {
     tasksAPI.deleteTasks(todolistId, tasksId)
         .then(res => {
             const action = removeTaskAC(tasksId, todolistId)
@@ -103,24 +108,24 @@ export const removeTasksTC: any = (tasksId: string, todolistId: string) => (disp
         })
 }
 export const addTaskTC: any = (title: string, todolistId: string) => (dispatch:ThunkDispatchType ) => {
-    dispatch(setStatusAC("loading"))
+    dispatch(setAppStatusAC("loading"))
     tasksAPI.createTasks(todolistId, title)
         .then(res => {
             if (res.data.resultCode === 0) {
                 const task = res.data.data.item
                 const action = addTaskAC(task)
                 dispatch(action)
-                dispatch(setStatusAC("succeeded"))
+                dispatch(setAppStatusAC("succeeded"))
             } else if (res.data.messages.length) {
-                dispatch(setErrorAC(res.data.messages[0]))
+                dispatch(setAppErrorAC(res.data.messages[0]))
             } else {
-                dispatch(setErrorAC('some error occurred'))
-                dispatch(setErrorAC('failed'))
+                dispatch(setAppErrorAC('some error occurred'))
+                dispatch(setAppErrorAC('failed'))
             }
         })
 }
 export const updateTaskTC: any = (taskId: string, domainModel: MainUpdateTaskModelType, todolistId: string) =>
-    (dispatch: Dispatch<ActionType>, getState: () => AppRootStateType) => {
+    (dispatch: Dispatch<TasksReducerActionType>, getState: () => AppRootStateType) => {
 
 // так как мы обязаны на сервер отправить все св-ва, которые сервер ожидает, а не только
 // те, которые мы хотим обновить, соответственно нам нужно в этом месте взять таску целиком

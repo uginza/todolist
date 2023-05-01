@@ -48,7 +48,7 @@ export type TodolistType={
     title:string,
     addedDate:string,
     order:number,
-    entityStatus:RequestStatusType
+    entityStatus:string
 }
 
 export type ResponseType<D> = {

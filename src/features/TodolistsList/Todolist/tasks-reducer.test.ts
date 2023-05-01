@@ -202,7 +202,7 @@ test('task title of specified task should be changed', () => {
 
 test('new array should be added when new todolist is added', () => {
 
-    const action = addTodolistAC({id: '2', title: 'What to learn', addedDate: '', order: 0})
+    const action = addTodolistAC({id: '2', title: 'What to learn', addedDate: '',entityStatus: 'idle', order: 0})
 
     const endState = tasksReducer(startState, action)
 
@@ -233,8 +233,8 @@ test('property with todolistId should be deleted', () => {
 
 test('Empty array should be set when we set todolists', () => {
     const action = setTodolistsAC([
-        {id: '1', title: 'What to learn', addedDate: '', order: 0},
-        {id: '2', title: 'What to buy', addedDate: '', order: 0}
+        {id: '1', title: 'What to learn', addedDate: '',entityStatus: 'idle', order: 0},
+        {id: '2', title: 'What to buy', addedDate: '',entityStatus: 'idle', order: 0}
     ])
 
     const endState = tasksReducer({}, action)

@@ -8,7 +8,7 @@ import {TaskStatus, TaskType, tasksAPI, UpdateTaskModelType, TaskPriority} from 
 import {Dispatch} from "redux";
 import {AppRootStateType} from "../../../App/store";
 import {setAppErrorAC, SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../../App/app-reducer";
-import {handleServerAppError} from "../../../utils/errorUtils";
+import {handleServerAppError, handleServerNetworkError} from "../../../utils/errorUtils";
 
 
 export type ThunkDispatchType = Dispatch<TasksReducerActionType
@@ -122,8 +122,7 @@ export const addTaskTC: any = (title: string, todolistId: string) => (dispatch: 
             }
         })
         .catch((error) => {
-            dispatch(setAppErrorAC('some error occurred'))
-            dispatch(setAppErrorAC('failed'))
+            handleServerNetworkError(error,dispatch)
         })
 
 }
@@ -159,8 +158,7 @@ export const updateTaskTC: any = (taskId: string, domainModel: MainUpdateTaskMod
                     }
                 })
                 .catch((error) => {
-                    dispatch(setAppErrorAC('some error occurred'))
-                    dispatch(setAppErrorAC('failed'))
+                    handleServerNetworkError(error,dispatch)
                 })
         }
     }

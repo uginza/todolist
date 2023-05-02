@@ -9,12 +9,29 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
 
+ type FormikErrorType = {
+    email?: string
+    password?: string
+    rememberMe?: boolean
+}
+
 export const Login = () => {
- const formik = useFormik({
+    const formik = useFormik({
+        validate(values) {
+            const errors: FormikErrorType = {}
+            if (!values.email) {
+                    errors.email= 'Email is required'
+            }
+            if (!values.password) {
+                    errors.password= 'Password is required'
+
+            }
+            return errors
+        },
         initialValues: {
             email: '',
             password: '',
-            rememberMe: false
+            rememberMe: true
         },
         onSubmit: values => {
             alert(JSON.stringify(values));
@@ -24,28 +41,47 @@ export const Login = () => {
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'}>
             <form onSubmit={formik.handleSubmit}>
-            <FormControl>
-                <FormLabel>
-                    <p>To log in get registered
-                        <a href={'https://social-network.samuraijs.com/'}
-                           target={'_blank'}> here
-                        </a>
-                    </p>
-                    <p>or use common test account credentials:</p>
-                    <p>Email: free@samuraijs.com</p>
-                    <p>Password: free</p>
-                </FormLabel>
-                <FormGroup>
-                    <TextField label="Email" margin="normal" {...formik.getFieldProps('Email')}/>
-                    <TextField type="password" label="Password"
-                               margin="normal" {...formik.getFieldProps('password')}
-                    />
-                    <FormControlLabel label={'Remember me'} control={<Checkbox {...formik.getFieldProps('Remember me')} checked={formik.values.rememberMe}/>}/>
-                    <Button type={'submit'} variant={'contained'} color={'primary'}>
-                        Login
-                    </Button>
-                </FormGroup>
-            </FormControl>
+                <FormControl>
+                    <FormLabel>
+                        <p>To log in get registered
+                            <a href={'https://social-network.samuraijs.com/'}
+                               target={'_blank'}> here
+                            </a>
+                        </p>
+                        <p>or use common test account credentials:</p>
+                        <p>Email: free@samuraijs.com</p>
+                        <p>Password: free</p>
+                    </FormLabel>
+                    <FormGroup>
+                        <TextField
+                            label="Email"
+                            margin="normal"
+                            name="email"
+                            onChange={formik.handleChange}
+                            value={formik.values.email}
+                        />
+                        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+                        <TextField
+                            type="password"
+                            label="Password"
+                            margin="normal"
+                            name="password"
+                            onChange={formik.handleChange}
+                            value={formik.values.password}
+                        />
+                        {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+                        <FormControlLabel
+                            label={'Remember me'}
+                            control={<Checkbox
+                                name="RememberMe"
+                                onChange={formik.handleChange}
+                                value={formik.values.rememberMe}
+                                checked={formik.values.rememberMe}/>}/>
+                        <Button type={'submit'} variant={'contained'} color={'primary'}>
+                            Login
+                        </Button>
+                    </FormGroup>
+                </FormControl>
             </form>
         </Grid>
     </Grid>

@@ -9,7 +9,7 @@ import {handleServerAppError, handleServerNetworkError} from "../../utils/errorU
 export type LoginThunkDispatchType = Dispatch<LoginReducerActionType
    | SetAppErrorActionType | SetAppStatusActionType>
 
-type InitialStateType = {
+export type LoginInitialStateType = {
     isLoggedIn: boolean
 }
 
@@ -18,17 +18,15 @@ type LoginReducerActionType = ReturnType<typeof setIsLoggedInAC>
 
 //reducer
 
-const initialState: InitialStateType = {
+const initialState: LoginInitialStateType = {
     isLoggedIn: false
 }
 
-export const authReducer = (state: any = initialState, action: LoginReducerActionType): InitialStateType => {
+export const authReducer = (state: any = initialState, action: LoginReducerActionType): LoginInitialStateType => {
     switch (action.type) {
         case 'login/SET-LOGGED-IN':{
             return {...state,isLoggedIn : action.isLoggedIn}
         }
-
-
         default:
             return state;
     }

@@ -1,6 +1,7 @@
 import {todolistAPI, TodolistType} from "../../../api/ todolist-api";
 import {RequestStatusType, setAppStatusAC} from "../../../App/app-reducer";
 import {ThunkDispatchType} from "./tasks-reducer";
+import {handleServerNetworkError} from "../../../utils/errorUtils";
 
 
 const initialState: Array<TodolistDomainType> = []
@@ -55,6 +56,9 @@ export const fetchTodolistTC: any = () =>
             .then((res) => {
                 dispatch(setTodolistsAC(res.data))
                 dispatch(setAppStatusAC("succeeded"))
+            })
+            .catch((error) => {
+                handleServerNetworkError(error, dispatch)
             })
     }
 

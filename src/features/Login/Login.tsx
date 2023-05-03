@@ -8,6 +8,11 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
+import {useDispatch} from "react-redux";
+import {loginTC} from "./login-reducer";
+
+
+//types
 
  type FormikErrorType = {
     email?: string
@@ -15,7 +20,11 @@ import {useFormik} from "formik";
     rememberMe?: boolean
 }
 
+
+// Login Component
+
 export const Login = () => {
+    const dispatch=useDispatch()
     const formik = useFormik({
         validate(values) {
             const errors: FormikErrorType = {}
@@ -24,7 +33,6 @@ export const Login = () => {
             }
             if (!values.password) {
                     errors.password= 'Password is required'
-
             }
             return errors
         },
@@ -34,7 +42,7 @@ export const Login = () => {
             rememberMe: true
         },
         onSubmit: values => {
-            alert(JSON.stringify(values));
+            dispatch(loginTC(values));
         },
     })
 

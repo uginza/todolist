@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
 import {useDispatch} from "react-redux";
-import {loginTC} from "./login-reducer";
+import {loginTC} from "./auth-reducer";
 
 
 //types

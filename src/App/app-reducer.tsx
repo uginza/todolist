@@ -1,15 +1,18 @@
+import {Dispatch} from "redux";
 
 
 export type initialStateType = {
     status: 'idle' | 'loading' | 'succeeded' | 'failed'
     error: string | null
+    isInitialized:boolean
 }
 
 export type RequestStatusType='idle' | 'loading' | 'succeeded' | 'failed'
 
 const initialState: initialStateType = {
     status: 'idle',
-    error: null
+    error: null,
+    isInitialized:false
 }
 
 export type InitialStateType = typeof initialState
@@ -20,6 +23,8 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
             return {...state, status: action.status}
         case 'APP/SET-ERROR':
             return {...state, error: action.error}
+        case 'APP/SET-IS-INITIALIZED':
+            return {...state, isInitialized: action.isInitialized}
         default:
             return state
     }
@@ -27,9 +32,17 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
 export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', error} as const)
 export const setAppStatusAC = (status: 'idle' | 'loading' | 'succeeded' | 'failed') => (
     {type: 'APP/SET-STATUS', status} as const)
+export const setAppIsInitializedAC = (isInitialized:boolean) => (
+    {type: 'APP/SET-IS-INITIALIZED', isInitialized} as const)
+
+
+export const setAppIsInitializedTC=(dispatch:Dispatch)=>{
+    dispatch(setAppIsInitializedAC(true))
+}
 
 export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
 export type SetAppStatusActionType = ReturnType<typeof setAppStatusAC>
+export type setAppInitializedActionType=ReturnType<typeof setAppIsInitializedAC>
 
 type ActionsType = SetAppStatusActionType |
-    SetAppErrorActionType
+    SetAppErrorActionType|setAppInitializedActionType

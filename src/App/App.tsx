@@ -8,7 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import {TaskType} from "../api/tasks-api";
 import {TodolistList} from "../features/TodolistsList/TodolistList";
-import {LinearProgress} from "@mui/material";
+import {CircularProgress, LinearProgress} from "@mui/material";
 import {ErrorSnackBar} from "../components/ErrorSnackBar/ErrorSnackBar";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "./store";
@@ -28,6 +28,11 @@ type TodolistListPropsType = {
 function App({demo = false}: TodolistListPropsType) {
 
     const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
+    const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
+
+    if(!isInitialized){
+        return<div style={{marginTop:'20%',marginLeft:'45%'}}><CircularProgress /></div>
+    }
 
     return (
         <BrowserRouter>
@@ -46,8 +51,8 @@ function App({demo = false}: TodolistListPropsType) {
                 </AppBar>
                 <Container fixed>
                     <Routes>
-                    <Route path={'/'} element={<TodolistList demo={demo}/>}/>
-                    <Route path={'/login'} element={<Login />}/>
+                        <Route path={'/'} element={<TodolistList demo={demo}/>}/>
+                        <Route path={'/login'} element={<Login/>}/>
                     </Routes>
                 </Container>
             </div>

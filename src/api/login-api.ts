@@ -20,6 +20,12 @@ export const authAPI = {
         )
         return promise
     },
+    logout(){
+        const promise = instance.delete<ResponseType<{}>>(
+            `/auth/login`
+        )
+        return promise
+    },
     me(){
         const promise = instance.get<ResponseType<{id:number,login:string,email:string}>>(
             `/auth/me`

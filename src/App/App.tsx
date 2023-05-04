@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,11 +10,12 @@ import {TaskType} from "../api/tasks-api";
 import {TodolistList} from "../features/TodolistsList/TodolistList";
 import {CircularProgress, LinearProgress} from "@mui/material";
 import {ErrorSnackBar} from "../components/ErrorSnackBar/ErrorSnackBar";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./store";
-import {RequestStatusType} from "./app-reducer";
+import {RequestStatusType, setAppIsInitializedTC} from "./app-reducer";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
+import {fetchTasksTC} from "../features/TodolistsList/Todolist/tasks-reducer";
 
 
 export type TasksStateType = {
@@ -26,14 +27,17 @@ type TodolistListPropsType = {
 }
 
 function App({demo = false}: TodolistListPropsType) {
-
+    const dispatch = useDispatch()
     const status = useSelector<AppRootStateType, RequestStatusType>((state) => state.app.status)
     const isInitialized = useSelector<AppRootStateType, boolean>((state) => state.app.isInitialized)
 
-    if(!isInitialized){
-        return<div style={{marginTop:'20%',marginLeft:'45%'}}><CircularProgress /></div>
-    }
+    useEffect(() => {
+        dispatch(setAppIsInitializedTC())
+    }, [])
 
+    if (!isInitialized) {
+        return <div style={{marginTop: '20%', marginLeft: '45%'}}><CircularProgress/></div>
+    }
     return (
         <BrowserRouter>
             <div className="App">

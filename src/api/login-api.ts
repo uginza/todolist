@@ -19,6 +19,12 @@ export const authAPI = {
             `/auth/login`,data
         )
         return promise
+    },
+    me(){
+        const promise = instance.get<ResponseType<{id:number,login:string,email:string}>>(
+            `/auth/me`
+        )
+        return promise
     }
 }
 

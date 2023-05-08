@@ -15,7 +15,6 @@ import {AppRootStateType} from "./store";
 import {RequestStatusType, setAppIsInitializedTC} from "./app-reducer";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
-import {fetchTasksTC} from "../features/TodolistsList/Todolist/tasks-reducer";
 import Button from "@mui/material/Button/Button";
 import {logOutTC} from "../features/Login/auth-reducer";
 
@@ -64,6 +63,7 @@ const LogOutHandler=useCallback(()=>{
                     <Routes>
                         <Route path={'/'} element={<TodolistList demo={demo}/>}/>
                         <Route path={'/login'} element={<Login/>}/>
+                        <Route path='*' element={<h1>404: PAGE NOT FOUND</h1>} />
                     </Routes>
                 </Container>
             </div>

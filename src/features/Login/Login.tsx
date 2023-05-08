@@ -27,7 +27,7 @@ type FormikErrorType = {
 export const Login = () => {
     const dispatch = useDispatch()
 
-    const isLoggedIn = useSelector<AppRootStateType,boolean>(state => state.login.isLoggedIn)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     console.log(isLoggedIn)
     const formik = useFormik({
         validate(values) {
@@ -53,7 +53,6 @@ export const Login = () => {
         return <Navigate to={"/"}/>
     }
 
-
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'}>
             <form onSubmit={formik.handleSubmit}>
@@ -74,14 +73,14 @@ export const Login = () => {
                             margin="normal"
                             {...formik.getFieldProps('email')}
                         />
-                        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+                        {formik.touched.email && formik.errors.email ? <div>{formik.errors.email}</div> : null}
                         <TextField
                             type="password"
                             label="Password"
                             margin="normal"
                             {...formik.getFieldProps('password')}
                         />
-                        {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+                        {formik.touched.password && formik.errors.password ? <div>{formik.errors.password}</div> : null}
                         <FormControlLabel
                             label={'Remember me'}
                             control={<Checkbox

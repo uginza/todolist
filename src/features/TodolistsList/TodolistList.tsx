@@ -73,8 +73,7 @@ export const TodolistList: React.FC<TodolistListPropsType> = ({demo = false}) =>
     }, [dispatch])
 
     const addTodolist = useCallback((title: string) => {
-        const thunk = addTodolistTC(title)
-        dispatch(thunk)
+        dispatch(addTodolistTC(title))
     }, [dispatch])
 
     if (!isLoggedIn) {

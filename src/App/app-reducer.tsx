@@ -42,7 +42,7 @@ export const setAppIsInitializedTC:any =()=> (dispatch: Dispatch) => {
 
     authAPI.me().then(res => {
         if (res.data.resultCode === 0) {
-            dispatch(setIsLoggedInAC(true))
+            dispatch(setIsLoggedInAC({isLoggedIn: true}))
         }
         dispatch(setAppIsInitializedAC(true))
     })

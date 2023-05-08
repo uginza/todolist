@@ -8,6 +8,7 @@ import {todolistsReducer} from '../features/TodolistsList/Todolist/todolists-red
 import {TaskPriority, TaskStatus} from "../api/tasks-api";
 import {appReducer} from "../App/app-reducer";
 import thunkMiddleWare from "redux-thunk";
+import {configureStore} from "@reduxjs/toolkit";
 
 
 const rootReducer = combineReducers({
@@ -149,8 +150,10 @@ const initialGlobalState = {
     }
 }
 
-export const storyBookStore = createStore(rootReducer, initialGlobalState as AppRootStateType,
-    applyMiddleware(thunkMiddleWare))
+export const storyBookStore = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(thunkMiddleWare)
+})
 
 export const ReduxStoreProviderDecorator = (storyFn: any) => (
     <Provider

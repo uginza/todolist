@@ -27,7 +27,7 @@ type FormikErrorType = {
 export const Login = () => {
     const dispatch = useDispatch()
 
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     console.log(isLoggedIn)
     const formik = useFormik({
         validate(values) {

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {ResponseType, TodolistType} from "./ todolist-api";
+import {ResponseType} from "./ todolist-api";
 
 // api
 

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {RequestStatusType} from "../App/app-reducer";
 
 // api
 

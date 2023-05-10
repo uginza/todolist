@@ -51,11 +51,11 @@ export const changeEntityStatusAC = (id: string, status: RequestStatusType) => (
 
 export const fetchTodolistTC: any = () =>
     (dispatch: ThunkDispatchType) => {
-        dispatch(setAppStatusAC("loading"))
+        dispatch(setAppStatusAC({status:"loading"}))
         todolistAPI.GetTodolists()
             .then((res) => {
                 dispatch(setTodolistsAC(res.data))
-                dispatch(setAppStatusAC("succeeded"))
+                dispatch(setAppStatusAC({status:"succeeded"}))
             })
             .catch((error) => {
                 handleServerNetworkError(error, dispatch)
@@ -63,33 +63,33 @@ export const fetchTodolistTC: any = () =>
     }
 
 export const removeTodolistTC: any = (todolistId: string) => (dispatch: ThunkDispatchType) => {
-    dispatch(setAppStatusAC("loading"))
+    dispatch(setAppStatusAC({status:"loading"}))
     dispatch(changeEntityStatusAC(todolistId, 'loading'))
     todolistAPI.DeleteTodolist(todolistId)
         .then((res) => {
             dispatch(removeTodolistAC(todolistId))
-            dispatch(setAppStatusAC('succeeded'))
+            dispatch(setAppStatusAC({status:"succeeded"}))
         })
 }
 
 export const addTodolistTC: any = (title: string) => (dispatch:ThunkDispatchType) => {
-    dispatch(setAppStatusAC("loading"))
+    dispatch(setAppStatusAC({status:"loading"}))
     todolistAPI.CreateTodolist(title)
         .then((res) => {
             const todolist = res.data.data.item
             const action = addTodolistAC(todolist)
             dispatch(action)
-            dispatch(setAppStatusAC('succeeded'))
+            dispatch(setAppStatusAC({status:"succeeded"}))
         })
 }
 
 export const changeTodolistTitleTC: any = (todolistId: string, todolistTitle: string) => (dispatch:ThunkDispatchType) => {
-    dispatch(setAppStatusAC("loading"))
+    dispatch(setAppStatusAC({status:"loading"}))
     todolistAPI.updateTodolist(todolistId, todolistTitle)
         .then((res) => {
             const action = changeTodolistTitleAC(todolistId, todolistTitle)
             dispatch(action)
-            dispatch(setAppStatusAC('succeeded'))
+            dispatch(setAppStatusAC({status:"succeeded"}))
         })
 }
 

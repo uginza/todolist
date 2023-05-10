@@ -1,18 +1,16 @@
 import {
     AddTodolistActionType,
     RemoveTodolistActionType,
-    SetTodolistsActionType,
-    TodolistActionType
+    SetTodolistsActionType
 } from "./todolists-reducer";
 import {TaskPriority, tasksAPI, TaskStatus, TaskType, UpdateTaskModelType} from "../../../api/tasks-api";
 import {Dispatch} from "redux";
 import {AppRootStateType} from "../../../App/store";
-import {SetAppErrorActionType, setAppStatusAC, SetAppStatusActionType} from "../../../App/app-reducer";
+import {setAppStatusAC} from "../../../App/app-reducer";
 import {handleServerAppError, handleServerNetworkError} from "../../../utils/errorUtils";
 
 
-export type ThunkDispatchType = Dispatch<TasksReducerActionType
-    | SetAppErrorActionType | SetAppStatusActionType | TodolistActionType>
+export type ThunkDispatchType = Dispatch
 
 export type TasksStateType = {
     [key: string]: Array<TaskType>
@@ -93,33 +91,33 @@ export const setTasksAC = (tasks: Array<TaskType>, id: string) => ({
 // thunk list
 
 export const fetchTasksTC: any = (todolistId: string) => (dispatch: ThunkDispatchType) => {
-    dispatch(setAppStatusAC("loading"))
+    dispatch(setAppStatusAC({status:"loading"}))
     tasksAPI.getTasks(todolistId)
         .then((res) => {
             const tasks = res.data.items
             dispatch(setTasksAC(tasks, todolistId))
-            dispatch(setAppStatusAC("succeeded"))
+            dispatch(setAppStatusAC({status:"succeeded"}))
         })
 }
 
 export const removeTasksTC: any = (tasksId: string, todolistId: string) => (dispatch: ThunkDispatchType) => {
-    dispatch(setAppStatusAC("loading"))
+    dispatch(setAppStatusAC({status:"loading"}))
     tasksAPI.deleteTasks(todolistId, tasksId)
         .then(res => {
             const action = removeTaskAC(tasksId, todolistId)
             dispatch(action)
-            dispatch(setAppStatusAC("succeeded"))
+            dispatch(setAppStatusAC({status:"succeeded"}))
         })
 }
 export const addTaskTC: any = (title: string, todolistId: string) => (dispatch: ThunkDispatchType) => {
-    dispatch(setAppStatusAC("loading"))
+    dispatch(setAppStatusAC({status:"loading"}))
     tasksAPI.createTasks(todolistId, title)
         .then(res => {
             if (res.data.resultCode === 0) {
                 const task = res.data.data.item
                 const action = addTaskAC(task)
                 dispatch(action)
-                dispatch(setAppStatusAC("succeeded"))
+                dispatch(setAppStatusAC({status:"succeeded"}))
             } else {
                 handleServerAppError(res.data, dispatch)
             }

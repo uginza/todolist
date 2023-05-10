@@ -97,22 +97,22 @@ function AppWithReducers() {
     }
 
     function changeFilter(value: ChangeFilterType,todolistId: string) {
-        const action = changeTodolistFiltertAC(todolistId, value)
+        const action = changeTodolistFiltertAC({id:todolistId,filter: value})
         dispatchToTodolistsReducer(action)
     }
 
     function removeTodolist(todolistId: string) {
-        const action = removeTodolistAC(todolistId)
+        const action = removeTodolistAC({id:todolistId})
         dispatchToTodolistsReducer(action)
         dispatchToTasksReducer(action)
     }
 
     function changeTodolistTitle(todolistId: string, newTitle: string) {
-        const action = changeTodolistTitleAC(todolistId, newTitle)
+        const action = changeTodolistTitleAC({id:todolistId,title:newTitle})
         dispatchToTodolistsReducer(action)
 }
         function addTodolist(title: string) {
-            const action = addTodolistAC( {id: todolistID1, title:title,addedDate:'',entityStatus: 'idle',order:0})
+            const action = addTodolistAC( {todolist:{id: todolistID1, title:title,addedDate:'',entityStatus: 'idle',order:0}})
             dispatchToTodolistsReducer(action)
             dispatchToTasksReducer(action)
         }

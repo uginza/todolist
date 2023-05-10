@@ -11,7 +11,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC} from "../features/TodolistsList/Todolist/tasks-reducer";
+import {
+    addTaskAC,
+    MainUpdateTaskModelType,
+    removeTaskAC,
+    tasksReducer,
+    updateTaskAC
+} from "../features/TodolistsList/Todolist/tasks-reducer";
 import {
     addTodolistAC,
     changeTodolistFiltertAC,
@@ -64,7 +70,7 @@ function AppWithReducers() {
     ])
 
     const addTask = (newTitle: string, todolistId: string) => {
-        const action = addTaskAC({
+        const action = addTaskAC({task:{
             id: '3',
             title: newTitle,
             status: TaskStatus.New,
@@ -77,22 +83,22 @@ function AppWithReducers() {
             priority: TaskPriority.Low,
             addedDate: '',
             entityStatus: 'idle'
-        })
+        }})
         dispatchToTasksReducer(action)
     }
 
-    function removeTask(id: string, todolistId: string) {
-        const action = removeTaskAC(id, todolistId)
+    function removeTask(taskId: string, todolistId: string) {
+        const action = removeTaskAC({taskId, todolistId})
         dispatchToTasksReducer(action)
     }
 
-    function changeStatus(id: string, status:TaskStatus, todolistId: string) {
-        const action = updateTaskAC(id, {status}, todolistId)
+    function changeStatus(taskId: string, status: TaskStatus, todolistId: string) {
+        const action = updateTaskAC({taskId,model:{status:status},todolistId})
         dispatchToTasksReducer(action)
     }
 
-    function changeTaskTitle(id: string, title: string, todolistId: string) {
-        const action = updateTaskAC(id, {title}, todolistId)
+    function changeTaskTitle(taskId: string, title: string, todolistId: string) {
+        const action = updateTaskAC({taskId,model:{title:title},todolistId})
         dispatchToTasksReducer(action)
     }
 

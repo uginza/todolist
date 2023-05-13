@@ -15,9 +15,19 @@ import {TaskPriority, TaskStatus} from "../api/tasks-api";
 import {ChangeFilterType, TodolistDomainType} from "../features/TodolistsList/Todolist/todolists-reducer";
 import {TasksStateType} from "../features/TodolistsList/Todolist/tasks-reducer";
 
-function App() {
-    let todolistID1 = v1();
-    let todolistID2 = v1();
+
+let todolistID1 = v1();
+let todolistID2 = v1();
+
+function useTodolists() {
+    let [todolists, setTodolists] = useState<Array<TodolistDomainType>>([
+        {id: todolistID1, title: 'What to learn', entityStatus: "idle", filter: 'all', addedDate: '', order: 0},
+        {id: todolistID2, title: 'What to buy', entityStatus: "idle", filter: 'all', addedDate: '', order: 0}
+    ])
+    return [todolists, setTodolists] as const
+}
+
+function useTasks() {
     let [tasks, setTasks] = useState<TasksStateType>({
             [todolistID1]: [
                 {
@@ -137,10 +147,12 @@ function App() {
             ]
         }
     )
-    let [todolists, setTodolists] = useState<Array<TodolistDomainType>>([
-        {id: todolistID1, title: 'What to learn', entityStatus: "idle", filter: 'all', addedDate: '', order: 0},
-        {id: todolistID2, title: 'What to buy', entityStatus: "idle", filter: 'all', addedDate: '', order: 0}
-    ])
+    return [tasks,setTasks] as const
+}
+
+function App() {
+    let [todolists, setTodolists] = useTodolists()
+    let [tasks, setTasks]= useTasks()
 
     const addTask = (newTitle: string, todolistId: string) => {
         let newTask = {

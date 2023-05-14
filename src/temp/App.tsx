@@ -16,9 +16,8 @@ import {useTasks} from "../App/hooks/useTasks";
 
 
 function App() {
-    let {tasks, setTasks,addTask,removeTask,changeStatus,changeTaskTitle,removeAllTasks,newTodolistTasks}= useTasks()
+    let {tasks,addTask,removeTask,changeStatus,changeTaskTitle,removeAllTasks,newTodolistTasks}= useTasks()
     let [todolists,changeFilter,removeTodolist,changeTodolistTitle,addTodolist] = useTodolists(removeAllTasks,newTodolistTasks)
-
 
     return (
         <div className="App">
@@ -39,18 +38,11 @@ function App() {
                 <Grid container spacing={3}>
                     {
                         todolists.map(tl => {
-                            let tasksForTodolist = tasks[tl.id]
-                            if (tl.filter === 'active') {
-                                tasksForTodolist = tasksForTodolist.filter(task => task.status === TaskStatus.New)
-                            } else if (tl.filter === 'complited') {
-                                tasksForTodolist = tasksForTodolist.filter(task => task.status === TaskStatus.Complited)
-                            }
-                            return <Grid item>
+                            return <Grid item key={tl.id}>
                                 <Paper style={{padding: '10px'}}>
                                     <Todolist
                                         todolist={tl}
-                                        key={tl.id}
-                                        tasks={tasksForTodolist}
+                                        tasks={tasks[tl.id]}
                                         removeTask={removeTask}
                                         addTask={addTask}
                                         changeFilter={changeFilter}

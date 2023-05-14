@@ -2,6 +2,7 @@ import {AddCircle} from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton/IconButton";
 import TextField from "@mui/material/TextField/TextField";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import {useAddItemForm} from "./hooks/useAddItem";
 
 
 type AddItemPropsType = {
@@ -10,42 +11,15 @@ type AddItemPropsType = {
 }
 
 export const AddItem = React.memo(({addItem, disabled = false}: AddItemPropsType) => {
-    console.log("AddItem is called")
 
-    const [title, setTitle] = useState('')
-
-    let [error, setError] = useState('')
-
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
-    }
-
-    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (error !== null) {
-            setError("")
-        }
-        if (event.key === 'Enter') {
-            addTask();
-        }
-    }
-
-    const addTask = () => {
-        if (title.trim() !== "") {
-            addItem(title.trim())
-            setTitle('');
-        } else {
-            setError("Title is required")
-        }
-
-    }
-
-    const buttonSettings = {
-        maxWidth: '30px',
-        maxHeight: '30px',
-        minWidth: '30px',
-        minHeight: '30px'
-    }
-
+    const {
+        title,
+        error,
+        onChangeHandler,
+        onKeyPressHandler,
+        buttonSettings,
+        addTask
+    }=useAddItemForm(addItem)
 
     return (<div>
         {/* <input value={title}
@@ -64,6 +38,7 @@ export const AddItem = React.memo(({addItem, disabled = false}: AddItemPropsType
             onChange={onChangeHandler}
             onKeyPress={onKeyPressHandler}/>
         {/*<button onClick={addTask}>+</button>*/}
-        <IconButton disabled={disabled} color="secondary" style={buttonSettings} onClick={addTask}><AddCircle/></IconButton>
+        <IconButton disabled={disabled} color="secondary" style={buttonSettings}
+                    onClick={addTask}><AddCircle/></IconButton>
     </div>)
 })

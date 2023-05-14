@@ -124,5 +124,59 @@ export function useTasks() {
             ]
         }
     )
-    return [tasks,setTasks] as const
+
+    const addTask = (newTitle: string, todolistId: string) => {
+        let newTask = {
+            id: v1(),
+            title: newTitle,
+            status: TaskStatus.New,
+            order: 0,
+            completed: true,
+            deadline: '',
+            todoListId: todolistId,
+            startDate: '',
+            description: '',
+            priority: TaskPriority.Low,
+            addedDate: '',
+            entityStatus: 'idle'
+        }
+        let todolistTasks = tasks[todolistId]
+        tasks[todolistId] = [newTask, ...todolistTasks]
+        setTasks({...tasks})
+    }
+
+    function removeTask(id: string, todolistId: string) {
+        let todolistTasks = tasks[todolistId]
+        let filteredTasks = todolistTasks.filter(task => task.id !== id)
+        setTasks({...tasks, [todolistId]: filteredTasks})
+    }
+
+    function changeStatus(id: string, status: TaskStatus, todolistId: string) {
+        let todolistTasks = tasks[todolistId]
+        let task = todolistTasks.find(t => t.id === id)
+        if (task) {
+            task.status = status;
+        }
+        setTasks({...tasks});
+    }
+
+    function changeTaskTitle(id: string, newTitle: string, todolistId: string) {
+        let todolistTasks = tasks[todolistId]
+        let task = todolistTasks.find(t => t.id === id)
+        if (task) {
+            task.title = newTitle;
+        }
+        setTasks({...tasks});
+    }
+
+    function removeAllTasks(todolistId:string){
+        delete tasks[todolistId]
+        setTasks({...tasks})
+    }
+
+    function newTodolistTasks(id:string){
+        setTasks({...tasks, [id]: []})
+    }
+
+    return {tasks, setTasks, addTask,removeTask,changeStatus,changeTaskTitle,removeAllTasks,newTodolistTasks} as const
 }

@@ -57,8 +57,8 @@ export const logOutTC: any = () =>
         authAPI.logout()
             .then((res) => {
                 if (res.data.resultCode === 0) {
-                    dispatch(setIsLoggedInAC({isLoggedIn: true}))
-                    dispatch(setAppStatusAC({status: 'succeeded'}))
+                    dispatch(setIsLoggedInAC({isLoggedIn: false}))
+                    dispatch(setAppStatusAC({status: "idle"}))
                 } else {
                     handleServerAppError(res.data, dispatch)
                 }

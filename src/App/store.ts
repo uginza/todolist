@@ -5,6 +5,7 @@ import thunkMiddleWare from 'redux-thunk'
 import {appReducer} from "./app-reducer";
 import {authReducer} from "../features/Login/auth-reducer";
 import {configureStore} from "@reduxjs/toolkit";
+import {useDispatch} from "react-redux";
 
 const rootReducer = combineReducers({
     todolists: todolistsReducer,
@@ -21,8 +22,8 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(thunkMiddleWare)
 })
 
-/*export type AppDispatch = typeof store.dispatch
-export const useAppDispatch: () => AppDispatch = useDispatch*/
+export type AppDispatch = typeof store.dispatch
+export const useAppDispatch: () => AppDispatch = useDispatch
 
 // @ts-ignore
 window.store = store

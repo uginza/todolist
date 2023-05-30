@@ -76,7 +76,7 @@ export const {removeTaskAC,addTaskAC,setTasksAC,updateTaskAC}=slice.actions
 
 // thunk list
 
-export const fetchTasksTC: any = (todolistId: string) => (dispatch: ThunkDispatchType) => {
+export const fetchTasksTC= (todolistId: string) => (dispatch: ThunkDispatchType) => {
     dispatch(setAppStatusAC({status: "loading"}))
     tasksAPI.getTasks(todolistId)
         .then((res) => {
@@ -86,7 +86,7 @@ export const fetchTasksTC: any = (todolistId: string) => (dispatch: ThunkDispatc
         })
 }
 
-export const removeTasksTC: any = (taskId: string, todolistId: string) => (dispatch: ThunkDispatchType) => {
+export const removeTasksTC= (taskId: string, todolistId: string) => (dispatch: ThunkDispatchType) => {
     dispatch(setAppStatusAC({status: "loading"}))
     tasksAPI.deleteTasks(todolistId, taskId)
         .then(res => {
@@ -95,7 +95,7 @@ export const removeTasksTC: any = (taskId: string, todolistId: string) => (dispa
             dispatch(setAppStatusAC({status: "succeeded"}))
         })
 }
-export const addTaskTC: any = (title: string, todolistId: string) => (dispatch: ThunkDispatchType) => {
+export const addTaskTC= (title: string, todolistId: string) => (dispatch: ThunkDispatchType) => {
     dispatch(setAppStatusAC({status: "loading"}))
     tasksAPI.createTasks(todolistId, title)
         .then(res => {
@@ -111,9 +111,8 @@ export const addTaskTC: any = (title: string, todolistId: string) => (dispatch: 
         .catch((error) => {
             handleServerNetworkError(error, dispatch)
         })
-
 }
-export const updateTaskTC: any = (taskId: string, model: MainUpdateTaskModelType, todolistId: string) =>
+export const updateTaskTC= (taskId: string, model: MainUpdateTaskModelType, todolistId: string) =>
     (dispatch: ThunkDispatchType, getState: () => AppRootStateType) => {
 
 // так как мы обязаны на сервер отправить все св-ва, которые сервер ожидает, а не только

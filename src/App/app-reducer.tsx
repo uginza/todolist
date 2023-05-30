@@ -2,6 +2,8 @@ import {Dispatch} from "redux";
 import {authAPI} from "../api/login-api";
 import {setIsLoggedInAC} from "../features/Login/auth-reducer";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {ThunkDispatchType} from "../features/TodolistsList/Todolist/tasks-reducer";
+import {AppRootStateType} from "./store";
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
@@ -40,7 +42,7 @@ export const appReducer = slice.reducer
 export const {setAppStatusAC, setAppErrorAC, setAppIsInitializedAC} = slice.actions
 
 
-export const setAppIsInitializedTC: any = () => (dispatch: Dispatch) => {
+export const setAppIsInitializedTC = () => (dispatch: ThunkDispatchType) => {
 
     authAPI.me().then(res => {
         if (res.data.resultCode === 0) {

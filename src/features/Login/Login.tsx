@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Grid from '@mui/material/Grid';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
@@ -25,8 +25,10 @@ type FormikErrorType = {
 // Login Component
 
 export const Login = () => {
-    const dispatch = useDispatch()
 
+    const [rememberMe,setRememberMe]=useState(true)
+
+    const dispatch = useDispatch()
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     console.log(isLoggedIn)
     const formik = useFormik({
@@ -86,7 +88,10 @@ export const Login = () => {
                             label={'Remember me'}
                             control={<Checkbox
                                 {...formik.getFieldProps('RememberMe')}
-                                checked={formik.values.rememberMe}/>}/>
+                                checked={formik.values.rememberMe===rememberMe}
+                                onChange={e =>{setRememberMe(!rememberMe)}}
+                            />
+                        }/>
                         <Button type={'submit'} variant={'contained'} color={'primary'}>
                             Login
                         </Button>

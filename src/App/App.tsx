@@ -41,14 +41,13 @@ const LogOutHandler=useCallback(()=>{
         return <div style={{marginTop: '20%', marginLeft: '45%'}}><CircularProgress/></div>
     }
     return (
-        <BrowserRouter>
             <div className="App">
                 <AppBar position="static">
                     <Toolbar variant="dense">
                         <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}}>
                         </IconButton>
                         <Typography variant="h6" color="inherit" component="div">
-                            <Button color="inherit" onClick={LogOutHandler}>Log out</Button>
+                            {isLoggedIn&&<Button color="inherit" onClick={LogOutHandler}>Log out</Button>}
                         </Typography>
 
                     </Toolbar>
@@ -62,7 +61,6 @@ const LogOutHandler=useCallback(()=>{
                     </Routes>
                 </Container>
             </div>
-        </BrowserRouter>
     );
 }
 

@@ -4,19 +4,18 @@ import './index.css';
 import App from "./App/App";
 import {Provider} from "react-redux";
 import {store} from "./App/store";
+import {HashRouter} from "react-router-dom";
 
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-    <React.StrictMode>
+    <HashRouter>
         <Provider store={store}>
             <App />
         </Provider>
-    </React.StrictMode>
-
-
+        </HashRouter>
 );
 
 /*ReactDOM.render(<Provider store={store}>
